@@ -1,0 +1,4 @@
+{"check": "johnson_mean", "result": {"a1_cases": 700, "a_ge_2_cases": 24058, "atom": "45/91", "integer_mean_cases": 24758, "minimum_gap": "8/273", "minimum_gap_parameters": [15, 5, 3], "n_max": 300, "target": "11/21"}}
+{"check": "unimodal_path", "result": {"exhaustive_alphabet": [0, 1, 2, 3], "exhaustive_max_length": 8, "exhaustive_weakly_unimodal_cases": 4352, "random_positive_cases": 100000, "random_seed": 681}}
+{"check": "hypergeometric_modular", "result": {"hypergeometric_laws": 42680, "modular_periods": 448540, "n_max": 80}}
+{"check": "finite_group", "result": {"coefficient_slice_laws": 16939, "groups": ["Z2", "Z3", "Z4", "Z5", "Z6", "Z2xZ2"], "n_max": 8}}

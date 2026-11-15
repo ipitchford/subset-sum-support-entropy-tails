@@ -1,0 +1,258 @@
+{
+ "schemaVersion": "1.0",
+ "provenance": "Compiled 15 November 2026 for 0.1.0-candidate from the dated searches recorded in PRIOR_ART.md (12 and 14 November 2026), the internal AI-assisted review of 14 November 2026, the reference records in refs.bib (Crossref, DataCite and arXiv records retrieved 14 November 2026) and the publisher's source check of 15 November 2026. It records scrutiny performed, not historical priority.",
+ "contributionMap": [
+  {
+   "claim": "Theorem 1.1: m(n,k) = 2C(n-2,k-1) for k >= 5, n >= 2k+1, attained only by (1,-1,0,...,0) (Conjecture 1 of Mogilnykh-Vorob'ev-Valyuzhenich 2018), with the complete formula and all minimisers for every n, k",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.1; Sections 2-3",
+   "searches": [
+    {
+     "date": "2026-11-12",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "minimum support Johnson graph eigenfunction; MMS-type problems Johnson scheme; Mogilnykh Vorob'ev Valyuzhenich Conjecture 1; sequence 252, 420, 660, 990 (minimum supports at k = 5)"
+    }
+   ],
+   "closestPriorWork": "Mogilnykh-Vorob'ev-Valyuzhenich 2018 (Theorem 1 reduction to two vector classes, Section 5 computer comparison for 6 <= n <= 600, balanced value and exceptions); Vorob'ev-Mogilnykh-Valyuzhenich 2018 (n >= n0(k), n0 unspecified)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "no earlier proof of Conjecture 1 found; the extra minimiser (1,1,-1,-1,0) at (5,2) is absent from MVV Thm 1 and Sotnikova-Valyuzhenich 2021 Thm 5"
+  },
+  {
+   "claim": "Theorems 1.2 and 1.3, Corollary 1.4: majorization frontier, exact minimum Renyi entropy for every order with threshold alpha_k at half-sampling, Bernoulli bound exactly for alpha <= 2",
+   "unit": "statement",
+   "paperLocation": "Theorems 1.2, 1.3, 4.3; Corollary 1.4; Sections 4-5",
+   "searches": [
+    {
+     "date": "2026-11-14",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "entropic MMS; Renyi entropy sampling without replacement; Ai Kuzelka Pelekis; majorization subset sums"
+    }
+   ],
+   "closestPriorWork": "Ai-Kuzelka-Pelekis 2026 (arXiv:2606.30486v1: Lemma 3 chain majorization, Shannon bound, Renyi optimisation left open with numerical suggestion); Madiman-Wang-Woo 2019; Mattner-Schulz 2018 and Levin 2024 (different orderings)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "the reduction to hypergeometric laws is AKP's (credited)"
+  },
+  {
+   "claim": "Theorem 1.5: P(Hyp(n,i,k) >= ik/n) >= k/n for n >= 4k, unique minimiser i = 1 for n > 4k; Corollary 7.2: Aydinian-Blinovsky conjecture implies MMS for n >= 4k",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.5; Section 7",
+   "searches": [
+    {
+     "date": "2026-11-14",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "hypergeometric tail lower bound P(H >= EH); Aydinian-Blinovsky conjecture; Ai Pelekis hypergeometric tails 8k; Manickam-Miklos-Singhi conjecture recent progress"
+    }
+   ],
+   "closestPriorWork": "Ai-Pelekis 2026 (n >= 8k; state they could not reach 4k); Ai-Karagiannis-Kuzelka-Pelekis 2026 (arXiv:2610.24726v1, Theorem 2 IFR lemma and Theorem 3(1), used and credited)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "Case B of the proof follows AKKP Theorem 3(1); the 4k statement and the MMS consequence were not found stated"
+  },
+  {
+   "claim": "Theorem 1.6: exact degree-one distance on Boolean slices over every nontrivial Abelian group, and the entropy dichotomy by elements of order two",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.6; Section 8",
+   "searches": [
+    {
+     "date": "2026-11-14",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "Boolean slice polynomial distance degree one; spherically punctured biorthogonal codes; Krawtchouk polynomial extremum; Abelian group slice functions"
+    }
+   ],
+   "closestPriorWork": "Dumer-Kapralova 2013 Corollary 10 (binary Krawtchouk extremum, hence the binary distance; reproved as Brouwer-Cioaba-Ihringer-McGinnis 2018 Thm 1.2); Amireddy-Behera-Srinivasan-Sudan 2025 Thm 6.1 (bound (r-1)/n for n >= 8)",
+   "verdict": "partially-known-cited",
+   "verdictNote": "binary distance is prior work; new are the uniform exact formula over all groups and n, and the entropy dichotomy"
+  },
+  {
+   "claim": "Corollaries 6.1-6.3: largest atom, small-ball inequality, incidence-rank families",
+   "unit": "statement",
+   "paperLocation": "Section 6",
+   "searches": [
+    {
+     "date": "2026-11-12",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "minimum support Johnson graph eigenfunction; MMS-type problems Johnson scheme; Mogilnykh Vorob'ev Valyuzhenich Conjecture 1; sequence 252, 420, 660, 990 (minimum supports at k = 5)"
+    },
+    {
+     "date": "2026-11-14",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "entropic MMS; Renyi entropy sampling without replacement; Ai Kuzelka Pelekis; majorization subset sums"
+    }
+   ],
+   "closestPriorWork": "Grosu-Person-Szabo 2014 Section 2 (reports Odlyzko and Ahlswede-Aydinian-Khachatrian for the rank result)",
+   "verdict": "partially-known-cited",
+   "verdictNote": "Corollary 6.3 is known and re-derived; Corollary 6.2 not found"
+  },
+  {
+   "claim": "Method: domination of every population by two-valued ones, reducing each question to atoms or tails of hypergeometric laws; the integer-mean atom estimate (Lemma 2.2); the parity majorization chain at half-sampling (Theorem 4.3)",
+   "unit": "method",
+   "paperLocation": "Sections 1.6, 2, 4",
+   "searches": [
+    {
+     "date": "2026-11-12",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "minimum support Johnson graph eigenfunction; MMS-type problems Johnson scheme; Mogilnykh Vorob'ev Valyuzhenich Conjecture 1; sequence 252, 420, 660, 990 (minimum supports at k = 5)"
+    },
+    {
+     "date": "2026-11-14",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "entropic MMS; Renyi entropy sampling without replacement; Ai Kuzelka Pelekis; majorization subset sums"
+    },
+    {
+     "date": "2026-11-14",
+     "corpus": "arXiv; Semantic Scholar (including the citation graph of Mogilnykh-Vorob'ev-Valyuzhenich 2018); Crossref; general web search; Evidence Press release corpus (site feed)",
+     "query": "hypergeometric tail lower bound P(H >= EH); Aydinian-Blinovsky conjecture; Ai Pelekis hypergeometric tails 8k; Manickam-Miklos-Singhi conjecture recent progress"
+    }
+   ],
+   "closestPriorWork": "MVV 2018 Theorem 1 (two vector classes for the zero atom); AKP 2026 Lemma 3 (chain majorization to hypergeometric laws); Mattner-Schulz 2018 and Levin 2024 (other orderings of symmetric hypergeometric laws)",
+   "verdict": "partially-known-cited",
+   "verdictNote": "the reductions are credited; the integer-mean atom estimate and the moving-centre parity chain were not found"
+  }
+ ],
+ "sourcesReadInFull": [
+  {
+   "citation": "Mogilnykh, I. Yu., Vorob'ev, K. V. and Valyuzhenich, A. A. (2018), MMS-type problems for Johnson scheme, arXiv:1810.04075",
+   "usedFor": "Conjecture 1, Theorem 1, Section 5 computations (6 <= n <= 600), balanced value and exceptions",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://arxiv.org/abs/1810.04075"
+  },
+  {
+   "citation": "Ai, J., Kuzelka, O. and Pelekis, C. (2026), An entropic analogue of the MMS conjecture, arXiv:2606.30486v1",
+   "usedFor": "Lemma 3 (chain reduction), Section 5 open optimisation and numerical suggestion",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://arxiv.org/abs/2606.30486v1"
+  },
+  {
+   "citation": "Ai, J. and Pelekis, C. (2026), On lower bounds for hypergeometric tails, arXiv:2601.09485v2 (Statistics & Probability Letters 236, 110798)",
+   "usedFor": "Theorem 1.1 (n >= 8k) and the remark that 4k was not reached",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://arxiv.org/abs/2601.09485v2"
+  },
+  {
+   "citation": "Ai, J., Karagiannis, V., Kuzelka, O. and Pelekis, C. (2026), On the probability that a discrete IFR random variable exceeds its mean, arXiv:2610.24726v1",
+   "usedFor": "Theorem 2 (IFR lemma) and Theorem 3(1), used in the proof of Theorem 1.5",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://arxiv.org/abs/2610.24726v1"
+  },
+  {
+   "citation": "Brouwer, A. E., Cioaba, S. M., Ihringer, F. and McGinnis, M. (2018), The smallest eigenvalues of Hamming graphs, Johnson graphs and other distance-regular graphs with classical parameters, JCTB 133, 88-121 (arXiv:1709.09011)",
+   "usedFor": "Theorem 1.2 (Krawtchouk extremum), its attribution to Dumer-Kapralova Corollary 10 and its proof",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://doi.org/10.1016/j.jctb.2018.04.005"
+  },
+  {
+   "citation": "Dumer, I. and Kapralova, O. (2013), Spherically punctured biorthogonal codes, IEEE Trans. Inf. Theory 59(9), 6010-6017",
+   "usedFor": "Corollary 10 and the Krawtchouk definition (equation 4), checked against Lemma 8.2",
+   "readWhat": "whole journal article",
+   "date": "2026-11-15",
+   "evidenceLocator": "https://doi.org/10.1109/TIT.2013.2250579"
+  },
+  {
+   "citation": "Levin, B. (2023), Stochastic ordering of symmetric core event probabilities with respect to row margins for multiple hypergeometric random variables, arXiv:2311.17884v1 (preprint of Sequential Analysis 43(4) (2024) 417-431); with Levin, B., Columbia Biostatistics Technical Report B-255 (2023, updated 2024), which restates the 2024 result",
+   "usedFor": "the one sentence after Theorem 4.3 (fixed-centre peakedness as the sample size varies)",
+   "readWhat": "whole preprint; the technical report's restatement (Theorem 2) and introduction",
+   "date": "2026-11-15",
+   "evidenceLocator": "https://arxiv.org/abs/2311.17884v1"
+  },
+  {
+   "citation": "Amireddy, P., Behera, A. R., Srinivasan, S. and Sudan, M. (2025), A near-optimal polynomial distance lemma over Boolean slices, ECCC TR25-056 (ICALP 2025)",
+   "usedFor": "Theorem 6.1 and its stated bound (r-1)/n",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://eccc.weizmann.ac.il/report/2025/056/"
+  },
+  {
+   "citation": "Grosu, C., Person, Y. and Szabo, T. (2014), On the rank of higher inclusion matrices, J. London Math. Soc. 90(2), 333-349 (arXiv:1306.2197)",
+   "usedFor": "Section 2 account of the rank-deficiency results behind Corollary 6.3",
+   "readWhat": "whole paper",
+   "date": "2026-11-14",
+   "evidenceLocator": "https://doi.org/10.1112/jlms/jdu029"
+  }
+ ],
+ "limitationTriage": [
+  {
+   "limitation": "Tail problem for 2k < n < 4k open",
+   "closingQuestion": "What is the exact range of n/k where a single outlier minimises the tail?",
+   "triedOrSearched": "exact computation for k <= 40 (failures up to n/k = 10/3, none in (10/3, 4))",
+   "estimatedCost": "research-level",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "no proof technique for the intermediate range",
+   "whyNotClosedNow": "Section 9, open problem 1"
+  },
+  {
+   "limitation": "MMS conjecture not proved",
+   "closingQuestion": "Does the result settle MMS?",
+   "triedOrSearched": "Corollary 7.2 makes the dependence on the Aydinian-Blinovsky conjecture explicit",
+   "estimatedCost": "research-level",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "the two-valued reduction is itself a conjecture",
+   "whyNotClosedNow": "outside scope; stated plainly"
+  },
+  {
+   "limitation": "Zero-sum theorem over finite groups",
+   "closingQuestion": "What is the minimum support over Z_q?",
+   "triedOrSearched": "explicit counterexamples over Z_2, Z_3, Z_5 verified",
+   "estimatedCost": "research-level",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "binary case is a signed Krawtchouk extremum varying with n and k",
+   "whyNotClosedNow": "Section 9, open problem 3"
+  },
+  {
+   "limitation": "Higher Johnson eigenspaces and Grassmann analogue",
+   "closingQuestion": "Do the methods extend beyond the first eigenspace?",
+   "triedOrSearched": "considered in the extension scout; not attempted within budget",
+   "estimatedCost": "research-level",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "hard",
+   "whyNotClosedNow": "Section 9, open problem 2"
+  },
+  {
+   "limitation": "Lemma 8.2 and the Levin sentence rest on cited sources",
+   "closingQuestion": "Do the cited sources state what the manuscript attributes to them?",
+   "triedOrSearched": "Dumer-Kapralova journal article read in full (Corollary 10 matches); Levin preprint and technical report read (fixed centre, sample size varies)",
+   "estimatedCost": "under one hour",
+   "cheap": true,
+   "decision": "CLOSED",
+   "reasonOpen": "",
+   "whyNotClosedNow": ""
+  },
+  {
+   "limitation": "Priority rests on a bounded search",
+   "closingQuestion": "Would indexed databases change attribution?",
+   "triedOrSearched": "arXiv, Semantic Scholar citation graph, Crossref, web search and the Evidence Press corpus",
+   "estimatedCost": "subscription indexes",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "MathSciNet and zbMATH not used",
+   "whyNotClosedNow": "recorded here"
+  }
+ ],
+ "extensionScout": {
+  "by": "five internal reviewer agents and an adversarial review by a second AI model",
+  "date": "2026-11-14",
+  "proposals": [
+   "hypergeometric tail below 8k",
+   "small-ball inequality",
+   "second-smallest support and stability",
+   "exact zero-sum value over Z_q",
+   "group entropy equality classes",
+   "higher Johnson and Grassmann eigenspaces"
+  ],
+  "actions": [
+   "proved for n >= 4k (Theorem 1.5)",
+   "proved (Corollary 6.2)",
+   "not done: small-n data irregular",
+   "not done: open problem",
+   "not done: messy for 3-torsion",
+   "not done: open problem"
+  ]
+ }
+}

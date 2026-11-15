@@ -1,0 +1,18 @@
+Software with which the shipped outputs were reproduced before this release was frozen (15 November 2026)
+
+  Platform    macOS 27.2.1, arm64 (Apple silicon)
+  Python      standard library only. Release replay: CPython 3.11.14 (normal and python -O), run through uv 0.10.4.
+              GitHub CI: CPython 3.12 on ubuntu-latest.
+  pdfTeX      3.141592653-2.6-1.40.29 (TeX Live 2026); manuscript.pdf from manuscript.tex, three pdflatex passes
+
+Commands (run in a copy of the package; the scripts write their outputs to the working directory):
+
+  python3 -I -B verify.py --output verification.json
+  python3 -I -B verify_independent.py > verification_independent.jsonl
+  python3 -I -B fingerprints.py
+  python3 -I -B verify_small_complete.py verification_small_complete.json
+  python3 -I -B verify_extensions.py --output verification_extensions.json
+
+Add -O to any of them to run with assertions removed; the checks are explicit and still run. Each finishes in seconds
+(verify_extensions.py in about ten). All decisions use Python integers or fractions.Fraction, so the outputs do not
+depend on the platform; verification.json also records the Python version and run time.

@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "python": "3.11.14",
+  "arithmetic": "Integers and Fraction, except labelled Decimal threshold approximations",
+  "finite_checks_are_not_proofs": true,
+  "checks": {
+    "support_grid": {
+      "n_range": [
+        2,
+        10
+      ],
+      "integer_alphabet": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ],
+      "zero_sum_populations": 192,
+      "slice_laws": 1344,
+      "equality_cases": 94,
+      "scope": "All nondecreasing vectors on this finite grid; all k. Permutations preserve the counts."
+    },
+    "hypergeometric_atoms": {
+      "n_max": 60,
+      "hypergeometric_laws": 34655,
+      "atom_comparisons": 434710,
+      "classified_equalities": 1796
+    },
+    "parity_majorization": {
+      "m_max": 100,
+      "comparisons": 4950,
+      "proper_comparisons": 4851,
+      "reflection_equalities": 99
+    },
+    "entropy_grid": {
+      "n_range": [
+        2,
+        10
+      ],
+      "integer_alphabet": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "slice_laws": 6828,
+      "entropy_orders": [
+        2,
+        3,
+        5
+      ],
+      "exact_power_sum_comparisons": 20484,
+      "classified_equalities": 1596,
+      "strict_gap_majorization_comparisons": 13584
+    },
+    "examples": {
+      "negative_control": {
+        "n": 4,
+        "k": 2,
+        "order": 3,
+        "power_sum": "11/36",
+        "bernoulli_power_sum": "1/4",
+        "expected_universal_claim": "fails"
+      },
+      "omitted_equality_example": {
+        "n": 5,
+        "k": 2,
+        "zero_sums": 4,
+        "support": 6
+      },
+      "threshold_decimal_approximations": {
+        "2": "2",
+        "3": "3.59426974985353684051958091237617770766961117517691147020112719414446514415",
+        "4": "5.0898781927597916596496625259830048829817324893338151420736153151591714139",
+        "5": "6.5311420391260607423893461881350262539750536709861869434905085431283479173",
+        "10": "13.5126038845847941820032010814297578518498828510710094825082082914450239403",
+        "50": "68.967563936528493296069511009511056838013451116228432947394632898386326589"
+      },
+      "threshold_method": "75-digit Decimal bisection; approximations, not interval certificates"
+    }
+  },
+  "elapsed_seconds": 0.798
+}

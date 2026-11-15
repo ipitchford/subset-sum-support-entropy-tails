@@ -1,0 +1,126 @@
+{
+ "title": "Fixed-size subset sums: sharp support, Rényi entropy and tail bounds",
+ "upload_type": "publication",
+ "publication_type": "preprint",
+ "description": "<p><strong>Unrefereed research candidate.</strong> Proof of the Mogilnykh&ndash;Vorob&rsquo;ev&ndash;Valyuzhenich conjecture, the exact R&eacute;nyi minimum for sampling without replacement, and the hypergeometric tail problem from n = 4k.</p><p><strong>The question.</strong> Pick k of n given real numbers at random, without replacement, and add them. How concentrated can that random sum be? The paper answers three classical forms of this question exactly: how often the sum can be exactly zero, how small its entropy can be, and how rarely it can be nonnegative.</p><p><strong>Results.</strong> (1) Zero sums. If the numbers add up to zero and are not all zero, at least 2&middot;C(n&minus;2, k&minus;1) of the k-subsets have a nonzero sum whenever k &ge; 5 and n &ge; 2k+1, and only the pattern (1, &minus;1, 0, &hellip;, 0), up to scaling and reordering, attains this. This is the smallest support of an eigenfunction in the first nontrivial eigenspace of the Johnson graph, and proves Conjecture 1 of Mogilnykh, Vorob&rsquo;ev and Valyuzhenich (2018), who had checked it by computer for n &le; 600. A formula with all equality cases is given for every n and k, including the case (1, 1, &minus;1, &minus;1, 0) at n = 5, k = 2 that earlier classifications missed (Theorem 1.1). (2) Entropy. The minimum R&eacute;nyi entropy of the sum is found for every finite order, answering a question of Ai, Ku&#382;elka and Pelekis (2026): one outlier is optimal except at half-sampling (n = 2k), where two outliers win above an explicit order &alpha;<sub>k</sub> (&alpha;<sub>2</sub> = 2, about 1.386k for large k). So the universal Bernoulli lower bound holds exactly for orders up to 2 (Theorems 1.2 and 1.3, Corollary 1.4). (3) Tails. For two-valued populations, the probability that the sum is at least its mean is at least k/n whenever n &ge; 4k, with a single outlier the unique minimiser for n &gt; 4k (Theorem 1.5); Ai and Pelekis (2026) had n &ge; 8k. The proof uses a 2026 lemma of Ai, Karagiannis, Ku&#382;elka and Pelekis. Consequently the Aydinian&ndash;Blinovsky conjecture (that two-valued populations are the worst case) would imply the Manickam&ndash;Mikl&oacute;s&ndash;Singhi conjecture for all n &ge; 4k. This does not prove the Manickam&ndash;Mikl&oacute;s&ndash;Singhi conjecture, and below 4k a single outlier is not always the worst case. (4) Exact analogues over Abelian groups, where elements of order two change the answer at half-sampling (Theorem 1.6), and a small-ball inequality for sampling without replacement; a known incidence-rank result is re-derived.</p><p><strong>Limits.</strong> Real numbers only for the zero-sum theorem (it fails over Z<sub>2</sub>, Z<sub>3</sub> and Z<sub>5</sub>); first Johnson eigenspace only; the tail problem below n = 4k is open. Finite computer checks corroborate but do not replace the written proofs.</p><p><strong>Contents.</strong> The paper (LaTeX source and PDF); five standard-library Python scripts of exact finite checks (each runs in seconds and exits nonzero on any failure, also under python -O) with their recorded outputs; a claim ledger and prior-art note; the bibliography from registry records; a machine-readable index; a research-gate record; a rating-free review summary; a replay receipt and SHA-256 sums.</p><p><strong>Assurance.</strong> Complete written proofs for every result. Internal AI-assisted review only (five reviewer roles, an adversarial review and an audit by a second AI model, clean replays, a re-review and a proof audit): not peer review, independent reproduction or formal verification. Creator: Anonymous. Text and data CC0-1.0; code MIT.</p>",
+ "creators": [
+  {
+   "name": "Anonymous"
+  }
+ ],
+ "access_right": "open",
+ "license": "cc-zero",
+ "version": "0.1.0-candidate",
+ "publication_date": "2026-11-15",
+ "keywords": [
+  "subset sums",
+  "sampling without replacement",
+  "Johnson graph",
+  "minimum support",
+  "eigenfunctions",
+  "Rényi entropy",
+  "majorization",
+  "hypergeometric distribution",
+  "Manickam-Miklós-Singhi conjecture",
+  "Boolean slice",
+  "Krawtchouk polynomials"
+ ],
+ "notes": "Short title: Fixed-size subset sums. Code (the five Python scripts and the CI workflows) is MIT; prose, manuscript and data are CC0-1.0.",
+ "related_identifiers": [
+  {
+   "identifier": "https://github.com/ipitchford/subset-sum-support-entropy-tails/tree/v0.1.0-candidate",
+   "relation": "isSupplementTo",
+   "scheme": "url"
+  },
+  {
+   "identifier": "https://evidencepress.org/releases/subset-sum-support-entropy-tails/",
+   "relation": "isDocumentedBy",
+   "scheme": "url"
+  },
+  {
+   "identifier": "10.1134/s0032946012040059",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.4230/lipics.icalp.2025.11",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/j.spl.2026.110798",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/j.jctb.2018.04.005",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1109/tit.2013.2250579",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1112/jlms/jdu029",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1080/07474946.2024.2379901",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/0097-3165(88)90077-5",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1090/tran/6986",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.33048/semi.2018.15.137",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/j.disc.2019.03.002",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/j.jcta.2015.01.007",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.26493/2590-9770.1404.61e",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/j.disc.2018.04.018",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "arXiv:2606.30486",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2503.20473",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2610.24726",
+   "relation": "references",
+   "scheme": "arxiv"
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: MIT
+name: Replay
+on:
+  push:
+  pull_request:
+jobs:
+  quick:
+    name: All five scripts, normal and python -O, and a negative control (blocking; about a minute)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check SHA256SUMS
+        run: sha256sum -c SHA256SUMS
+      - name: Run every script from a fresh copy, normal and optimized, and compare outputs
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          for mode in normal optimized; do
+            O=""; [ "$mode" = optimized ] && O="-O"
+            d="$RUNNER_TEMP/$mode"; mkdir -p "$d"
+            cp verify.py verify_independent.py verify_small_complete.py verify_extensions.py fingerprints.py "$d/"
+            (
+              cd "$d"
+              python3 -I -B $O verify.py --output verification.json
+              python3 -I -B $O verify_independent.py > verification_independent.jsonl
+              python3 -I -B $O fingerprints.py
+              python3 -I -B $O verify_small_complete.py verification_small_complete.json
+              python3 -I -B $O verify_extensions.py --output verification_extensions.json
+            ) > "$d.log" 2>&1 || { tail -40 "$d.log"; echo "a script failed ($mode)"; exit 1; }
+            for f in verification_independent.jsonl fingerprints.json verification_small_complete.json verification_extensions.json; do
+              cmp "$d/$f" "$f" || { echo "$f differs ($mode)"; exit 1; }
+            done
+            python3 -I -c 'import json,sys; a,b=(json.load(open(p)) for p in sys.argv[1:]); [d.pop(k,None) for d in (a,b) for k in ("python","elapsed_seconds")]; sys.exit(0 if a==b else "verification.json differs")' "$d/verification.json" verification.json
+            echo "$mode: all five scripts passed; outputs identical (verification.json apart from python and elapsed_seconds)"
+          done
+      - name: A weakened support check must be rejected under -O (negative control)
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          d="$RUNNER_TEMP/negctl"; mkdir -p "$d"; cp verify.py "$d/verify.py"
+          sed -i 's/require(support >= target,/require(support > target,/' "$d/verify.py"
+          ! cmp -s "$d/verify.py" verify.py || { echo "mutation not applied"; exit 1; }
+          if (cd "$d" && python3 -I -B -O verify.py --output verification.json); then echo "negative control unexpectedly passed"; exit 1; else echo "negative control failed as expected"; fi
+      - name: Working tree unchanged
+        run: test -z "$(git status --porcelain)"

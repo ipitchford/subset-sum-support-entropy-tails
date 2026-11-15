@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using these metadata."
+type: software
+title: "Fixed-size subset sums: sharp support, Rényi entropy and tail bounds"
+abstract: "Unrefereed research candidate. Choose k of n given real numbers at random without replacement and add them. If the numbers sum to zero and are not all zero, at least 2C(n-2,k-1) of the k-subsets have a nonzero sum for k >= 5 and n >= 2k+1, with equality only for (1,-1,0,...,0); this proves the 2018 conjecture of Mogilnykh, Vorob'ev and Valyuzhenich on the minimum support of eigenfunctions in the first nontrivial eigenspace of the Johnson graph, with the complete formula and all minimisers for every n and k. The minimum Renyi entropy of the sum is found for every order: one outlier is optimal except at half-sampling, where two outliers win above an explicit order alpha_k (alpha_2 = 2), so the Bernoulli lower bound holds universally exactly for orders up to 2. For two-valued populations the probability that the sum is at least its mean is at least k/n for n >= 4k (previously n >= 8k), so the Aydinian-Blinovsky conjecture would imply the Manickam-Miklos-Singhi conjecture for n >= 4k. Exact analogues over Abelian groups and a small-ball inequality are included."
+authors:
+  - name: "Anonymous"
+version: "0.1.0-candidate"
+date-released: "2026-11-15"
+doi: "10.5281/zenodo.24241302"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24241302"
+    description: "This version"
+  - type: doi
+    value: "10.5281/zenodo.24241301"
+    description: "All versions (concept DOI)"
+repository-code: "https://github.com/ipitchford/subset-sum-support-entropy-tails"
+url: "https://evidencepress.org/releases/subset-sum-support-entropy-tails/"
+license: CC0-1.0
+keywords:
+  - subset sums
+  - sampling without replacement
+  - Johnson graph
+  - minimum support
+  - Rényi entropy
+  - hypergeometric distribution
+  - Manickam-Miklós-Singhi conjecture
+preferred-citation:
+  type: article
+  title: "Fixed-size subset sums: sharp support, Rényi entropy and tail bounds"
+  authors:
+    - name: "Anonymous"
+  year: 2026
+  doi: "10.5281/zenodo.24241302"
+  publisher:
+    name: "Zenodo"
+  notes: "Version 0.1.0-candidate; unrefereed"

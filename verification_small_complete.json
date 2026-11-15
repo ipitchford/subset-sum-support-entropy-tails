@@ -1,0 +1,385 @@
+{
+ "script": "verify_small_complete.py",
+ "cases": [
+  {
+   "n": 2,
+   "k": 1,
+   "box": 1,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 3,
+   "k": 1,
+   "box": 1,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 3,
+   "k": 2,
+   "box": 1,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 4,
+   "k": 1,
+   "box": 2,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 4,
+   "k": 2,
+   "box": 2,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     -1,
+     1,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 4,
+   "k": 3,
+   "box": 2,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 5,
+   "k": 1,
+   "box": 3,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 5,
+   "k": 2,
+   "box": 3,
+   "minimum": 6,
+   "formula": 6,
+   "minimisers": [
+    [
+     -1,
+     -1,
+     0,
+     1,
+     1
+    ],
+    [
+     -1,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 5,
+   "k": 3,
+   "box": 3,
+   "minimum": 6,
+   "formula": 6,
+   "minimisers": [
+    [
+     -1,
+     -1,
+     0,
+     1,
+     1
+    ],
+    [
+     -1,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 5,
+   "k": 4,
+   "box": 3,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 6,
+   "k": 1,
+   "box": 5,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 6,
+   "k": 2,
+   "box": 5,
+   "minimum": 6,
+   "formula": 6,
+   "minimisers": [
+    [
+     -1,
+     -1,
+     -1,
+     1,
+     1,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 6,
+   "k": 3,
+   "box": 5,
+   "minimum": 8,
+   "formula": 8,
+   "minimisers": [
+    [
+     -2,
+     -2,
+     1,
+     1,
+     1,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 6,
+   "k": 4,
+   "box": 5,
+   "minimum": 6,
+   "formula": 6,
+   "minimisers": [
+    [
+     -1,
+     -1,
+     -1,
+     1,
+     1,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 6,
+   "k": 5,
+   "box": 5,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 7,
+   "k": 1,
+   "box": 9,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 7,
+   "k": 2,
+   "box": 9,
+   "minimum": 10,
+   "formula": 10,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 7,
+   "k": 3,
+   "box": 9,
+   "minimum": 20,
+   "formula": 20,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 7,
+   "k": 4,
+   "box": 9,
+   "minimum": 20,
+   "formula": 20,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 7,
+   "k": 5,
+   "box": 9,
+   "minimum": 10,
+   "formula": 10,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "n": 7,
+   "k": 6,
+   "box": 9,
+   "minimum": 2,
+   "formula": 2,
+   "minimisers": [
+    [
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "ok": true
+  }
+ ],
+ "failures": [],
+ "passed": true
+}

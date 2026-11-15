@@ -1,0 +1,1326 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,booktabs,array}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype,hyperref,xcolor}
+\definecolor{inkplum}{HTML}{54384D}
+\hypersetup{colorlinks=true,linkcolor=inkplum,citecolor=inkplum,urlcolor=inkplum,
+ pdftitle={Fixed-size subset sums: sharp support, Renyi entropy and tail bounds},
+ pdfauthor={Anonymous}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\Hyp}{\operatorname{Hyp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\one}{\mathbf 1}
+\setlength{\emergencystretch}{2em}
+\allowdisplaybreaks[1]
+\title{Fixed-size subset sums:\\ sharp support, R\'enyi entropy and tail bounds}
+\author{Anonymous}
+\date{14 November 2026 {\small(version 0.1.0-candidate, DOI \href{https://doi.org/10.5281/zenodo.24241302}{10.5281/zenodo.24241302})}}
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+\begin{abstract}
+Choose \(k\) of \(n\) given real numbers uniformly at random and add them.
+This paper determines exactly how concentrated such a fixed-size subset sum
+can be, in three senses. First, for a nonzero vector with zero total, at least
+\(2\binom{n-2}{k-1}\) of its \(k\)-subsets have a nonzero sum whenever
+\(k\ge5\) and \(n\ge2k+1\), with equality only for \((1,-1,0,\ldots,0)\) up to
+scaling and reordering. This proves a 2018 conjecture of Mogilnykh,
+Vorob'ev and Valyuzhenich on the smallest support of an eigenfunction in the
+first nontrivial eigenspace of the Johnson graph, which they had checked by
+computer for \(n\le600\). A formula with all equality cases is given for every
+\(n\) and \(k\), and a missing small equality case is added. Second, the
+minimum R\'enyi entropy of the sum is found for every finite order, answering
+a question of Ai, Ku\v{z}elka and Pelekis: a Bernoulli law is extremal except
+at half-sampling, where a three-point law takes over above an explicit order,
+so the universal Bernoulli bound holds exactly for orders up to two. Third,
+for the two-valued populations to which Aydinian and Blinovsky conjecturally
+reduce the Manickam--Mikl\'os--Singhi problem, the probability of a
+nonnegative sum is minimised by a single outlier whenever \(n\ge4k\); this
+extends the known range \(n\ge8k\) to the threshold of that conjecture.
+Analogues over Abelian groups and a small-ball inequality complete the
+picture.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{The question}
+Take \(n\) real numbers \(x_1,\ldots,x_n\), choose \(k\) of them uniformly at
+random without replacement, and add them. Throughout, \(n\ge2\) and
+\(1\le k\le n-1\). Write
+\[
+ \Omega_{n,k}=\{S\subseteq[n]:|S|=k\},\qquad
+ L_x(S)=\sum_{i\in S}x_i,\qquad X=L_x(S)\ \text{with }S\text{ uniform on }\Omega_{n,k}.
+\]
+How concentrated can the random sum \(X\) be? Unlike a sum of independent
+terms, a fixed-size sample has rigid dependence: the sample of the
+complementary indices has sum \(\sum_ix_i-X\). The question has three
+classical forms, which this paper takes up in turn.
+
+\begin{enumerate}
+\item \emph{The zero atom.} If \(\sum_ix_i=0\) and \(x\ne0\), how many
+\(k\)-subsets can have sum exactly zero? This is the minimum-support problem
+for the first nontrivial eigenspace of the Johnson graph (Section~\ref{subsec:known}).
+\item \emph{The whole law.} How small can the Shannon or R\'enyi entropy of
+\(X\) be when \(x\) is not constant? This is the ``entropic'' version of the
+Manickam--Mikl\'os--Singhi problem introduced by Ai, Ku\v{z}elka and Pelekis
+\cite{AKP}.
+\item \emph{The sign.} If \(\sum_ix_i=0\), how small can \(\Prb(X\ge0)\) be?
+This is the Manickam--Mikl\'os--Singhi (MMS) problem itself.
+\end{enumerate}
+
+A single principle links the three. Every population is dominated, in a
+precise majorization sense, by a population that takes only two values; the
+sum of a two-valued population is an affine image of a hypergeometric count.
+For the zero atom and for the whole law (up to majorization) this reduction is
+proved below, and each question becomes one about a few atoms of
+hypergeometric laws; the paper's new ingredients are sharp estimates for those
+atoms. For the sign the reduction to two-valued populations is a conjecture of
+Aydinian and Blinovsky, and the paper solves the resulting hypergeometric
+problem.
+
+\subsection{What was known}\label{subsec:known}
+
+\paragraph{Minimum supports in the Johnson graph.}
+The Johnson graph \(J(n,k)\) has the \(k\)-subsets of \([n]\) as vertices,
+two being adjacent when they share \(k-1\) elements. For an eigenvalue of a
+graph one may ask for the smallest number of vertices on which a nonzero
+eigenfunction can be supported; this ``uncertainty principle'' question has
+been studied for many families of graphs, and is surveyed by Sotnikova and
+Valyuzhenich \cite{SV}. For \(J(n,k)\), the eigenspace of the largest
+nontrivial eigenvalue \(k(n-k)-n\) consists exactly of the functions \(L_x\)
+with \(\sum_ix_i=0\) \cite{VMV,MVV}; indeed
+\(\sum_{T\sim S}L_x(T)=\{k(n-k)-n\}L_x(S)\), and \(x\mapsto L_x\) is
+injective on zero-sum vectors (if all \(k\)-sums agree, all coordinates
+agree, and the zero total makes them vanish). So the first question asks for
+\[
+ m(n,k)=\min\bigl\{\,|\{S\in\Omega_{n,k}:L_x(S)\ne0\}|\;:\;x\in\R^n\setminus\{0\},\ \textstyle\sum_ix_i=0\bigr\}.
+\]
+Vorob'ev, Mogilnykh and Valyuzhenich \cite{VMV} found the minimum support of
+every fixed Johnson eigenspace when \(n\) is larger than an unspecified
+\(n_0(k)\). Mogilnykh, Vorob'ev and Valyuzhenich \cite{MVV} showed that a
+minimiser is either a multiple of the coordinate difference
+\(D=(1,-1,0,\ldots,0)\) or a two-valued vector, so that \(m(n,k)\) is the
+smaller of two explicit expressions. They compared the two expressions by
+computer for \(6\le n\le600\), recorded the balanced value and three small
+exceptions, and stated \cite[Conjecture~1]{MVV}:
+\[
+ m(n,k)=2\binom{n-2}{k-1}\qquad(k\ge5,\ n\ge2k+1).
+\]
+What remained open was therefore a uniform proof of a binomial comparison,
+valid for every \(n\), together with the absence of further exceptions for
+\(k\le4\) beyond the computed range.
+
+\paragraph{Entropy of subset sums.}
+Ai, Ku\v{z}elka and Pelekis \cite{AKP} proved the sharp Shannon bound
+\(H_1(X)\ge H_1(\Ber(k/n))\), where \(\Ber(k/n)\) is the Bernoulli law with
+parameter \(k/n\), for nonconstant zero-sum populations. Their argument (their
+Lemma~3) compares the law of \(X\) by majorization with hypergeometric laws
+\(\Hyp(n,i,k)\), the law of the number of marked items in a random
+\(k\)-sample from \(n\) items of which \(i\) are marked (Section~\ref{subsec:notation}).
+For R\'enyi entropy their Corollary~5 reduces the problem to minimising
+\(H_\alpha(\Hyp(n,i,k))\) over \(1\le i<n\). They wrote that
+they were unable to solve this optimisation and that their numerical
+experiments suggest the minimum is at \(i=1\) \cite[Section~5]{AKP}. An earlier paper of the same authors \cite{AKP25} uses
+majorization of populations to obtain tail bounds for sampling without
+replacement.
+
+\paragraph{The sign problem.}
+The MMS conjecture asserts that if \(n\ge4k\) and \(\sum_ix_i=0\), then
+\(\Prb(X\ge0)\ge k/n\), i.e.\ at least \(\binom{n-1}{k-1}\) of the
+\(k\)-subsets have nonnegative sum \cite{MS88}; the population
+\((n-1,-1,\ldots,-1)\) shows that \(k/n\) would be sharp. It is known for
+\(n\ge10^{46}k\) \cite{Pok}. Aydinian and Blinovsky \cite{AB} conjectured that
+for every \(n\) and \(k\) the two-valued populations are extremal, which
+reduces the problem to minimising the hypergeometric tails
+\(\Prb(\Hyp(n,i,k)\ge ik/n)\) over \(1\le i\le n-1\). Ai and Pelekis
+\cite{AP} solved this tail problem for \(n\ge8k\) and remarked that they were
+unable to reach \(n\ge4k\).
+
+\paragraph{Other value groups.}
+The affine version of the zero-atom question, with values in an arbitrary
+Abelian group, is a minimum-distance question for codes on the Boolean slice.
+Amireddy, Behera, Srinivasan and Sudan \cite{ABSS} proved a degree-one
+distance bound \((r-1)/n\), \(r=\min(k,n-k)\), as part of a polynomial
+distance lemma for low-degree testing; the binary case is the
+Dumer--Kapralova theory of spherically punctured biorthogonal codes
+\cite{DK,BCIM}.
+
+\subsection{Notation}\label{subsec:notation}
+Binomial coefficients with an invalid lower index are zero, and
+\(r=\min(k,n-k)\).
+\begin{itemize}
+\item \(\Hyp(n,i,k)\) is the number of marked items in a uniform \(k\)-sample,
+without replacement, from \(n\) items of which \(i\) are marked; it has mass
+\(\binom ij\binom{n-i}{k-j}/\binom nk\) at \(j\) and mean \(ik/n\). If the
+population takes the value \(y_+\) on \(i\) indices and \(y_-<y_+\) on the
+rest, then \(X=ky_-+(y_+-y_-)\Hyp(n,i,k)\).
+\item \(\Ber(p)\) denotes the two-point probability vector \((1-p,p)\). For
+\(k\ge2\) put
+\[
+ U=\Bigl(\tfrac12,\tfrac12\Bigr),\qquad
+ q_k=\frac{k}{2k-1},\qquad
+ Q_k=\Bigl(q_k,\ \tfrac{1-q_k}2,\ \tfrac{1-q_k}2\Bigr)
+ =\Bigl(\tfrac{k}{2k-1},\tfrac{k-1}{2(2k-1)},\tfrac{k-1}{2(2k-1)}\Bigr).
+\]
+When \(n=2k\), \(U\) is the law of the sample sum of a population with one
+outlier, \((1,0,\ldots,0)\), and \(Q_k\) is the law for two outliers,
+\((1,1,0,\ldots,0)\).
+\item Probability vectors are compared after sorting in decreasing order and
+padding with zeros: \(p\preceq q\) (\(q\) \emph{majorizes} \(p\)) if the sum
+of the \(\ell\) largest entries of \(p\) is at most that of \(q\) for every
+\(\ell\). R\'enyi entropy is taken in bits:
+\[
+ H_\alpha(p)=\frac{\log_2\sum_jp_j^\alpha}{1-\alpha}\ (0<\alpha<\infty,\
+ \alpha\ne1),\qquad H_1(p)=-\sum_jp_j\log_2p_j .
+\]
+Every \(H_\alpha\), \(0<\alpha<\infty\), is strictly Schur-concave on padded
+vectors: \(p\preceq q\) implies \(H_\alpha(p)\ge H_\alpha(q)\), with equality
+only when \(p\) and \(q\) agree after sorting. (This follows from strict
+convexity or concavity of \(u\mapsto u^\alpha\), and from strict concavity of
+\(-u\log u\) at \(\alpha=1\).) A comparison \(p\preceq q\) is \emph{proper} if
+\(p\) and \(q\) do not agree after sorting.
+\end{itemize}
+
+\subsection{Main results}
+
+\begin{theorem}[First Johnson eigenspace: complete support formula]\label{thm:support}
+For all \(n\ge2\) and \(1\le k\le n-1\),
+\[
+ m(n,k)=
+ \begin{cases}
+ 2,&r=1,\\
+ 2\binom{n-2}{r-2},&n=2r,\ r\ge2,\\
+ 6,&(n,r)=(6,2),\\
+ 39,&(n,r)=(9,3),\\
+ 110,&(n,r)=(10,4),\\
+ 2\binom{n-2}{r-1},&\text{otherwise}.
+ \end{cases}
+\]
+All minimising vectors, up to nonzero scalar multiples and permutations of
+coordinates, are listed below (superscripts denote repetition).
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Parameters & Minimising vectors & Status of the value\\
+\midrule
+\(r=1\) & \(D\) & elementary\\
+\(n=2r,\ r\ge2\) & \(((r-1)^2,(-1)^{2r-2})\) & \cite[Section 5]{MVV}\\
+\((n,r)=(5,2)\) & \(D\) and \((1,1,-1,-1,0)\) & second vector new\\
+\((n,r)=(6,2)\) & \((1^3,(-1)^3)\) & \cite{MVV}\\
+\((n,r)=(8,2)\) & \(D\) and \((1^4,(-1)^4)\) & \cite{MVV}\\
+\((n,r)=(9,3)\) & \((2^3,(-1)^6)\) & \cite{MVV}\\
+\((n,r)=(10,4)\) & \((1^5,(-1)^5)\) & \cite{MVV}\\
+all other \(n>2r\ge4\) & \(D\) & computed in \cite{MVV} for \(r\ge3\), \(n\le600\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+In particular \(m(n,k)=2\binom{n-2}{k-1}\) for \(k\ge5\) and \(n\ge2k+1\),
+which is \cite[Conjecture~1]{MVV}.
+\end{theorem}
+
+The extra vector \((1,1,-1,-1,0)\) at \((n,k)=(5,2)\) is three-valued, so it is
+absent from the two-class description in \cite[Theorem~1]{MVV} and its
+restatement \cite[Theorem~5]{SV}; Remark~\ref{rem:52} explains why. The value
+\(m(5,2)=6\) is unaffected.
+
+For the remaining questions, \(x\) is any nonconstant real population; its
+mean need not be zero. The next theorem describes the law of \(X\) completely
+up to majorization, and is the source of the entropy results.
+
+\begin{theorem}[Majorization frontier]\label{thm:frontier}
+Let \(x\in\R^n\) be nonconstant and let \(p\) be the mass vector of \(X\).
+\begin{enumerate}
+\item If \(n\ne2k\), or \(n=2\), then \(p\preceq\Ber(k/n)\).
+\item If \(n=2k\ge4\), then \(p\preceq U\) or \(p\preceq Q_k\).
+\end{enumerate}
+All of these vectors are attained, and at \(n=2k\ge4\) the vectors \(U\) and
+\(Q_k\) are incomparable. Consequently the minimum over nonconstant \(x\) of any
+symmetric Schur-concave function of the mass vector, invariant under padding
+by zeros, is its value at \(\Ber(k/n)\), respectively the smaller of its
+values at \(U\) and \(Q_k\).
+\end{theorem}
+
+\begin{theorem}[Sharp R\'enyi entropy]\label{thm:entropy}
+For every \(0<\alpha<\infty\),
+\[
+ \min_{x\ \text{nonconstant}} H_\alpha(X)=
+ \begin{cases}
+ H_\alpha(\Ber(k/n)),& n\ne2k,\ \text{or }(n,k)=(2,1),\\
+ \min\{1,H_\alpha(Q_k)\},& n=2k\ge4.
+ \end{cases}
+\]
+For each \(k\ge2\) there is a unique \(\alpha_k>1\) with
+\begin{equation}\label{eq:transition}
+ \frac12\Bigl(\frac{2k}{2k-1}\Bigr)^{\alpha_k}
+ +\Bigl(\frac{k-1}{2k-1}\Bigr)^{\alpha_k}=1 .
+\end{equation}
+At \(n=2k\ge4\) the minimum is \(1=H_\alpha(U)\) for \(\alpha<\alpha_k\) and
+\(H_\alpha(Q_k)<1\) for \(\alpha>\alpha_k\). One has \(\alpha_2=2\),
+\(\alpha_k\) increases strictly, and
+\(\alpha_k=(2k-\tfrac12)\ln2-\tfrac{\ln2}{24k}+O(k^{-2})\).
+Every minimising population takes exactly two values. Their multiplicities
+are \(\{1,n-1\}\) when \(n\ne2k\) and when \(n=2k\), \(\alpha<\alpha_k\);
+they are \(\{2,n-2\}\) when \(n=2k\), \(\alpha>\alpha_k\); at
+\(\alpha=\alpha_k\) exactly these two families minimise. (For \((n,k)=(2,1)\)
+every nonconstant population has multiplicities \(\{1,1\}\) and law \(U\).)
+\end{theorem}
+
+\begin{corollary}[The universal Bernoulli bound]\label{cor:universal}
+The inequality \(H_\alpha(X)\ge H_\alpha(\Ber(k/n))\) holds for every
+nonconstant real population and all \(n,k\) if and only if \(0<\alpha\le2\).
+\end{corollary}
+
+So the numerical suggestion in \cite{AKP} is correct away from half-sampling
+and, at half-sampling, exactly for \(\alpha\le\alpha_k\). For example, at
+\(n=4\), \(k=2\) the population \((1,1,0,0)\) has law \((1/6,2/3,1/6)\),
+whose third-order power sum \(11/36\) exceeds \(1/4\); hence
+\(H_3=\tfrac12\log_2(36/11)<1=H_3(\Ber(1/2))\).
+
+\begin{theorem}[Hypergeometric tails from \(n=4k\)]\label{thm:tail}
+Let \(k\ge1\) and \(n\ge4k\). For every \(1\le i\le n-1\),
+\[
+ \Prb\bigl(\Hyp(n,i,k)\ge ik/n\bigr)\ \ge\ \frac kn ,
+\]
+with equality at \(i=1\); when \(n>4k\), equality holds only at \(i=1\).
+\end{theorem}
+
+Theorem~\ref{thm:tail} answers the question left open in \cite{AP} for
+\(4k\le n<8k\). Combined with the conjecture of Aydinian and Blinovsky it would
+give the MMS conjecture in its full range (Corollary~\ref{cor:AB}). Below
+\(n=4k\) the single outlier is no longer extremal for some \(n\)
+(Remark~\ref{rem:below4k}).
+
+\begin{theorem}[Abelian groups]\label{thm:groups}
+Let \(G\) be a nontrivial Abelian group and let
+\(f(S)=c+\sum_{i\in S}a_i\) with \(c,a_1,\ldots,a_n\in G\), not identically
+zero on \(\Omega_{n,k}\). Then the proportion of \(k\)-subsets with
+\(f(S)\ne0\) is at least
+\[
+ \delta_G(n,k)=
+ \begin{cases}
+ r/n,&n\ne2k,\\
+ (k-1)/(2k-1),&n=2k\ge4,\\
+ 1/2,&(n,k)=(2,1),
+ \end{cases}
+\]
+and this is attained. Moreover, for nonconstant populations
+\(a_1,\ldots,a_n\in G\) and \(n=2k\ge4\), the minimum of \(H_\alpha(X)\)
+is \(H_\alpha(\Ber(q_k))\) if \(G\) has an element of order two, and
+\(\min\{1,H_\alpha(Q_k)\}\) otherwise; for \(n\ne2k\) it is
+\(H_\alpha(\Ber(k/n))\).
+\end{theorem}
+
+\subsection{What is new, and what is not}
+\begin{itemize}
+\item Theorem~\ref{thm:support}: the reduction to two classes of vectors is
+\cite[Theorem~1]{MVV}; the balanced value and the small exceptions are in
+\cite[Section~5]{MVV}. New are a uniform proof of the comparison (the
+integer-mean atom estimate, Lemma~\ref{lem:meanatom}), hence
+\cite[Conjecture~1]{MVV}; the absence of further exceptions for \(k\le4\);
+and the extra equality case at \((5,2)\).
+\item Theorems~\ref{thm:frontier} and \ref{thm:entropy}: the reduction of
+arbitrary populations to hypergeometric laws is \cite[Lemma~3]{AKP}; the
+balanced maximum atom \(q_k\) is in \cite[Section~5]{MVV}; the link between
+majorization and R\'enyi entropy is classical \cite{MWW}. New are the
+frontier at half-sampling, the evaluation of the R\'enyi optimisation with the
+threshold \(\alpha_k\), all equality cases, and a parity majorization chain
+for balanced hypergeometric laws (Theorem~\ref{thm:parity}).
+\item Theorem~\ref{thm:tail} is new. Its proof rests on recent results of Ai,
+Karagiannis, Ku\v{z}elka and Pelekis \cite{AKKP}: a lemma on random variables
+with increasing failure rate (Lemma~\ref{lem:AKKP}) and its consequence
+\cite[Theorem~3(1)]{AKKP} for hypergeometric laws with non-integer mean. The
+new steps are the reduction to these results for \(n\ge4k\), the
+integer-mean case (via the identity used for Theorem~\ref{thm:support}) and the
+case of small mean.
+\item Theorem~\ref{thm:groups}: the binary distance is due to Dumer and
+Kapralova \cite{DK} (see \cite[Theorem~1.2]{BCIM}); the balanced value for
+\(n\ge8\) can be extracted from the proof of \cite[Theorem~6.1]{ABSS}. New
+are the uniform exact formula, which sharpens the stated bound \((r-1)/n\) of
+\cite{ABSS} (by \(1/n\) away from half-sampling, by \((k-1)/(2k(2k-1))\) at
+\(n=2k\)) and removes its condition \(n\ge8\), and the entropy
+dichotomy governed by elements of order two.
+\end{itemize}
+The paper also gives a small-ball inequality for sampling without replacement
+(Corollary~\ref{cor:smallball}), and recovers from the atom bound the known
+largest families of \(k\)-sets whose incidence matrix has rank below \(n\)
+(Corollary~\ref{cor:rank}).
+
+\subsection{Method and organisation}
+Section~\ref{sec:support} proves the conjectured range of
+Theorem~\ref{thm:support}. A count due to \cite{MVV} handles vectors with three
+or more distinct values (Lemma~\ref{lem:three}); for two-valued vectors the
+zero atom is a hypergeometric atom at an integer mean, and
+Lemma~\ref{lem:meanatom} bounds it by comparing it with its four neighbours.
+Section~\ref{sec:small} completes Theorem~\ref{thm:support} for \(k\le4\) and
+for \(n=2k\). Section~\ref{sec:maj} proves Theorem~\ref{thm:frontier}: a chain
+construction reduces every population to two-valued ones
+(Lemma~\ref{lem:chain}), an atom bound settles \(n\ne2k\), and a parity
+majorization chain settles \(n=2k\). Section~\ref{sec:entropy} derives
+Theorem~\ref{thm:entropy} and Corollary~\ref{cor:universal} and classifies
+equality. Section~\ref{sec:conc} gives the largest-atom, small-ball and
+incidence-rank consequences. Section~\ref{sec:tail} proves
+Theorem~\ref{thm:tail}. Section~\ref{sec:abelian} treats Abelian groups and
+proves Theorem~\ref{thm:groups}. Section~\ref{sec:open} lists open problems.
+
+\section{The conjectured range}\label{sec:support}
+
+This section proves Theorem~\ref{thm:support} for \(k\ge5\), \(n\ge2k+1\).
+Complementation \(S\mapsto[n]\setminus S\) negates zero-sum \(k\)-sums into
+\((n-k)\)-sums, so \(m(n,k)=m(n,n-k)\) and we may assume \(k\le n/2\).
+
+\begin{lemma}[Three distinct values; \cite{MVV}]\label{lem:three}
+Let \(G\) be an Abelian group, \(c\in G\), and let \(a\in G^n\) have at least
+three distinct coordinates. Then
+\[
+ |\{S\in\Omega_{n,k}:c+L_a(S)\ne0\}|\ \ge\ 2\binom{n-2}{k-1}.
+\]
+If \(G=\R\), \(c=0\), \(\sum_ia_i=0\), \(k+1\le n-3\), and equality holds, then
+\(a\) is a scalar multiple of a permutation of \(D\).
+\end{lemma}
+\begin{proof}
+Let \(a_1,a_2,a_3\) be distinct. For each \((k-1)\)-subset \(A\) of
+\(\{4,\ldots,n\}\), the three values \(c+L_a(A)+a_\ell\), \(\ell\le3\), are
+distinct, so at least two are nonzero. For each \((k-2)\)-subset \(A\) of
+\(\{4,\ldots,n\}\), the three values \(c+L_a(A)+a_\ell+a_{\ell'}\),
+\(\ell<\ell'\le3\), are distinct by cancellation in \(G\), so again at least
+two are nonzero. These classes of \(k\)-sets are disjoint, and
+\(2\binom{n-3}{k-1}+2\binom{n-3}{k-2}=2\binom{n-2}{k-1}\). This counting step
+is the reduction in \cite[Theorem~1]{MVV}.
+
+For equality in the real zero-sum case, every \(k\)-set inside
+\(\{4,\ldots,n\}\) must have sum zero. Since \(1\le k<n-3\), exchanging one
+element of such a set shows that \(a_4,\ldots,a_n\) are all equal, and a
+vanishing \(k\)-sum makes them zero. Equality in the class with one special
+index then says that exactly two of \(a_1,a_2,a_3\) are nonzero; the total is
+zero, so they are opposite.
+\end{proof}
+
+\paragraph{Two-valued vectors and cell counts.}
+Let \(x\) be zero-sum and two-valued, with the larger value on \(i\) indices,
+\(1\le i\le n-1\). Then \(L_x(S)\) is an affine function of
+\(J=|S\cap I|\sim\Hyp(n,i,k)\), where \(I\) is the set of those indices, and
+\(L_x(S)=0\) exactly when \(J=ik/n\). So a zero sum is possible only when
+\(j=ik/n\) is an integer, and then
+\begin{equation}\label{eq:meanatom}
+ \Prb(L_x(S)=0)=p_j=\frac{\binom ij\binom{n-i}{k-j}}{\binom nk}.
+\end{equation}
+In that case write the four cell counts of the \(2\times2\) table (marked or
+not, sampled or not) at the mean as
+\[
+ a=j,\qquad b=i-j,\qquad c=k-j,\qquad d=n-i-k+j .
+\]
+The mean condition \(nj=ik\) is equivalent to \(ad=bc\), and adjacent atoms
+satisfy
+\begin{equation}\label{eq:ratios}
+ \frac{p_{j-1}}{p_j}=\frac{ad}{(b+1)(c+1)}=\frac{bc}{(b+1)(c+1)},\qquad
+ \frac{p_{j+1}}{p_j}=\frac{bc}{(a+1)(d+1)}=\frac{ad}{(a+1)(d+1)} .
+\end{equation}
+The vector \(D\) has \(2\binom{n-2}{k-1}\) nonzero \(k\)-sums, a proportion
+\(2k(n-k)/(n(n-1))\). Put
+\begin{equation}\label{eq:T}
+ T(n,k)=1-\frac{2k(n-k)}{n(n-1)},
+\end{equation}
+the proportion of zero \(k\)-sums of \(D\). A two-valued vector beats \(D\)
+exactly when its zero atom \(p_j\) exceeds \(T(n,k)\).
+
+\begin{lemma}[Integer-mean atom]\label{lem:meanatom}
+If \(k\ge5\), \(n\ge2k+1\), \(1\le i<n\) and \(j=ik/n\) is an integer, then
+\(p_j<T(n,k)\).
+\end{lemma}
+\begin{proof}
+Since \(p_j\) is unchanged by \(i\mapsto n-i\) (with \(j\mapsto k-j\)), we may
+assume \(i\le n/2\). Then \(a\le c\) because \(j=ik/n\le k/2\); \(a<b\)
+because \(j=ik/n<i/2\) (as \(k<n/2\)); and \(c<d\) because \(ad=bc\) and
+\(a<b\). Also
+\(a\ge1\), since \(i\ge1\) and \(j=ik/n\) is a positive integer. Hence all four
+counts are positive integers, and \(a+c=k\).
+
+\emph{Case \(a\ge2\).} Then \(b\ge a+1\ge3\); \(c\ge k/2>2\), so \(c\ge3\);
+and \(d\ge c+1\ge4\). Since \(a,b,c,d\ge2\), the neighbouring atoms
+\(j\pm1\) and \(j\pm2\) all carry positive mass. The functions
+\(t\mapsto t/(t+1)\) and \(t\mapsto t^2/((t+1)(t+2))\) increase, so
+\eqref{eq:ratios} gives
+\[
+ \frac{p_{j-1}}{p_j}=\frac{b}{b+1}\cdot\frac{c}{c+1}\ge\frac34\cdot\frac34=\frac9{16},
+ \qquad
+ \frac{p_{j+1}}{p_j}=\frac{a}{a+1}\cdot\frac{d}{d+1}\ge\frac23\cdot\frac45=\frac8{15}.
+\]
+For the two-step ratios, using \(ad=bc\) once more,
+\begin{align*}
+ \frac{p_{j-2}}{p_j}
+ &=\frac{b^2}{(b+1)(b+2)}\cdot\frac{c^2}{(c+1)(c+2)}
+   \Bigl(1-\frac1a\Bigr)\Bigl(1-\frac1d\Bigr)
+ \ge\frac{9}{20}\cdot\frac9{20}\cdot\frac12\cdot\frac34=\frac{243}{3200}>\frac1{16},\\
+ \frac{p_{j+2}}{p_j}
+ &=\frac{a^2}{(a+1)(a+2)}\cdot\frac{d^2}{(d+1)(d+2)}
+   \Bigl(1-\frac1b\Bigr)\Bigl(1-\frac1c\Bigr)
+ \ge\frac13\cdot\frac{8}{15}\cdot\frac23\cdot\frac23=\frac{32}{405}>\frac1{16}.
+\end{align*}
+Since the five atoms have total mass at most one,
+\[
+ 1>p_j\Bigl(1+\frac9{16}+\frac8{15}+\frac1{16}+\frac1{16}\Bigr)=p_j\cdot\frac{533}{240},
+ \qquad p_j<\frac{240}{533}<\frac5{11}.
+\]
+For fixed \(k\), \(T(n,k)\) increases in \(n\ge2k+1\): the derivative of its
+rational extension has numerator \(n^2-2kn+k>0\). Hence
+\(T(n,k)\ge T(2k+1,k)=k/(2k+1)\ge5/11\).
+
+\emph{Case \(a=1\).} Then \(c=k-1\ge4\), \(b\ge2\), \(d=bc\), and
+\(n=a+b+c+d=(b+1)k\ge3k\). The immediate neighbours suffice:
+\[
+ \frac{p_{j-1}}{p_j}=\frac{b}{b+1}\cdot\frac{c}{c+1}\ge\frac23\cdot\frac45=\frac8{15},\qquad
+ \frac{p_{j+1}}{p_j}=\frac12\cdot\frac{d}{d+1}\ge\frac12\cdot\frac89=\frac49,
+\]
+so \(p_j(1+8/15+4/9)<1\) and
+\[
+ p_j<\frac{45}{89}<\frac{11}{21}\le\frac{5k-3}{9k-3}=T(3k,k)\le T(n,k).
+\]
+The strict gaps are \(5/11-240/533=25/5863\) and \(11/21-45/89=34/1869\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:support} for \(k\ge5\), \(n\ge2k+1\)]
+A one-valued zero-sum vector is zero. Vectors with three or more distinct
+values have at least \(2\binom{n-2}{k-1}\) nonzero \(k\)-sums by
+Lemma~\ref{lem:three}, with equality only for \(D\) since
+\(n-3\ge2k-2\ge k+1\). A two-valued vector with \(ik/n\notin\Z\) has no zero
+\(k\)-sum at all; with \(ik/n\in\Z\), Lemma~\ref{lem:meanatom} shows it has
+strictly more nonzero \(k\)-sums than \(D\).
+\end{proof}
+
+\section{The remaining parameters}\label{sec:small}
+
+This section completes the proof of Theorem~\ref{thm:support}, again with
+\(k\le n/2\). The argument for \(n>2k\) is the same as in
+Section~\ref{sec:support}: three-valued vectors are handled by
+Lemma~\ref{lem:three}, and a two-valued competitor with an integer mean has
+zero atom \(p_j\), to be compared with \(T(n,k)\). The cell counts
+\(a,b,c,d\) are as in Section~\ref{sec:support}, with \(a\le c\).
+
+\paragraph{\(k=4\).}
+If \(a=1\), \(c=3\), then \(b\ge2\), \(d=3b\), \(n=4(b+1)\ge12\), and
+\[
+ \frac{p_{j-1}}{p_j}\ge\frac12,\qquad
+ \frac{p_{j+1}}{p_j}\ge\frac37,\qquad
+ \frac{p_{j+2}}{p_j}=\frac{b(b-1)}{(3b+1)(3b+2)}\ge\frac1{28};
+\]
+the last bound follows from writing the ratio as
+\(\frac{b-1}{b}\cdot\frac{b^2}{(3b+1)(3b+2)}\), a product of increasing
+factors. It gives \(p_j\le28/55<17/33=T(12,4)\le T(n,4)\).
+If \(a=c=2\), then \(b=d\ge3\), \(n=2b+4\), and
+\[
+ p_j=\frac{3(b+2)(b+1)}{2(2b+3)(2b+1)} ,
+\]
+which decreases strictly in \(b\) (the ratio of consecutive terms is
+\((b+3)(2b+1)/((b+1)(2b+5))<1\)). At \(b=3\), \(n=10\), it gives
+\(p_j=10/21\) and support \(110<112\): the exception \(m(10,4)=110\). For
+\(b\ge4\), \(p_j\le5/11<17/33\le T(n,4)\).
+
+\paragraph{\(k=3\).}
+Here \(a=1\), \(c=2\), \(d=2b\), \(n=3(b+1)\), with \(b\ge2\). At \(b=2\),
+\(n=9\), the zero atom is \(15/28\), giving support \(39<42\): the exception
+\(m(9,3)=39\). For \(b\ge3\) the immediate ratios are at least \(1/2\) and
+\(3/7\), so \(p_j\le14/27<13/22=T(12,3)\le T(n,3)\).
+
+\paragraph{\(k=2\).}
+An integer mean requires \(a=c=1\), \(b=d\), so \(n=2b+2\) is even and
+\(p_j=n/(2(n-1))\). Then
+\[
+ T(n,2)-p_j=\frac{(n-2)(n-8)}{2n(n-1)},
+\]
+which gives the exception \(m(6,2)=6\), the tie \(m(8,2)=12\) (both \(D\) and
+\((1^4,(-1)^4)\) minimise), and strict superiority of \(D\) for even \(n\ge10\).
+For odd \(n\) no two-valued competitor exists. For \(n\ge6\) the hypothesis
+\(k+1\le n-3\) of Lemma~\ref{lem:three} holds, which gives the remaining
+equality cases (at \(n=6\) the two-valued vector is strictly better, so \(D\)
+is not a minimiser there).
+
+At \(n=5\), \(k=2\), Lemma~\ref{lem:three} gives \(m(5,2)\ge6\), and \(D\)
+attains \(6\), but its equality statement does not apply since \(n-3=k\). A
+vector attains \(6\) exactly when four of its ten pairs have sum zero. If
+\(z\) coordinates vanish, the zero pairs are the \(\binom z2\) pairs of zeros
+and the pairs of opposite nonzero values. The cases \(z=4,5\) are impossible
+for a nonzero zero-sum vector. If \(z=3\), the two nonzero coordinates are
+opposite, giving \(D\). If \(z=2\), there is no zero pair among the zeros
+beyond one, and the three nonzero coordinates (with zero total) contain no
+opposite pair, so there is one zero pair only. If \(z=1\), four opposite pairs
+among four nonzero values require two copies each of \(u\) and \(-u\), giving
+\((1,1,-1,-1,0)\). If \(z=0\), four or more opposite pairs among five values
+\(\pm u\) need multiplicities \((1,4)\), \((2,2)\) or \((2,3)\) for some
+\(u\); the \((2,2)\) pattern leaves one further nonzero coordinate and a
+nonzero total, and the other two patterns also have nonzero total; values
+from two different absolute levels give at most three opposite pairs. Hence
+the minimisers at \((5,2)\) are \(D\) and \((1,1,-1,-1,0)\).
+
+\paragraph{\(k=1\).}
+A nonzero zero-sum vector has at least two nonzero coordinates, with equality
+exactly for multiples of \(D\).
+
+\paragraph{\(n=2k\), \(k\ge2\).}
+Three distinct values give at least \(2\binom{2k-2}{k-1}\) nonzero sums by
+Lemma~\ref{lem:three}, more than the claimed value. A two-valued vector has a
+zero atom only when \(i=2s\) is even, and then the atom is
+\[
+ c_s=\frac{\binom{2s}{s}\binom{2k-2s}{k-s}}{\binom{2k}{k}},\qquad1\le s\le k-1 .
+\]
+The sequence is symmetric under \(s\mapsto k-s\), and
+\[
+ \frac{c_{s+1}}{c_s}=\frac{(2s+1)(k-s)}{(s+1)(2k-2s-1)},
+\]
+whose denominator minus numerator is \(k-2s-1\). So \((c_s)\) decreases up to
+the middle and then increases; its maximum is \(c_1=c_{k-1}=k/(2k-1)=q_k\),
+attained only at \(s\in\{1,k-1\}\). The minimum support is therefore
+\(\binom{2k}{k}-2\binom{2k-2}{k-1}=2\binom{2k-2}{k-2}\), with the listed
+minimisers. This value and construction are recorded in
+\cite[Section~5]{MVV}. This completes the proof of Theorem~\ref{thm:support}.
+
+\begin{remark}[The equality case at \((5,2)\)]\label{rem:52}
+The vector \((1,1,-1,-1,0)\) has six nonzero pair sums and is optimal for
+\(J(5,2)\), but it is neither a coordinate difference nor two-valued. It is
+omitted from \cite[Theorem~1]{MVV} because the proof there uses injectivity of
+an inclusion map on \(n-3\) coordinates, which fails when \(n-3=k\); the same
+classification is repeated in \cite[Theorem~5]{SV}. An exhaustive search over
+all candidate vectors for \(n\le7\) (see ``Data, verification and AI use'' at the end) confirms that
+this is the only omission in that range.
+\end{remark}
+
+\section{Majorization by hypergeometric laws}\label{sec:maj}
+
+This section proves Theorem~\ref{thm:frontier}. Lemma~\ref{lem:chain} reduces
+any population to two-valued ones; Lemma~\ref{lem:atom} then settles
+\(n\ne2k\), and the parity chain of Theorem~\ref{thm:parity} settles \(n=2k\).
+
+\begin{lemma}[Chain reduction; \cite{AKP}]\label{lem:chain}
+Suppose the sorted population has a strict gap after its \(i\)-th smallest
+entry, so that \(i\) lower entries lie below \(n-i\) upper entries, and let
+\(g>0\) be the difference between the smallest upper and the largest lower
+entry. Then there is a coupling of \(S\) with a random chain
+\(S_0,S_1,\ldots\) of \(k\)-sets such that \(S=S_J\) with
+\(J\sim\Hyp(n,n-i,k)\) independent of the chain, and the sums
+\(L_x(S_j)\) increase in \(j\) by at least \(g\) at each step. Consequently
+the mass vector of \(X\) is majorized by that of \(\Hyp(n,i,k)\).
+\end{lemma}
+\begin{proof}
+Order the lower group and the upper group independently and uniformly at
+random. For each feasible \(j\), \(\max(0,k-i)\le j\le\min(k,n-i)\), let
+\(S_j\) consist of the first \(j\) upper and the first \(k-j\) lower entries.
+Passing from \(S_j\) to \(S_{j+1}\) replaces a lower entry by an upper one, so
+the sum increases by at least \(g\). Choose \(J\sim\Hyp(n,n-i,k)\)
+independently. Given \(J=j\), the set \(S_J\) is uniform among \(k\)-sets with
+\(j\) upper entries, so \(S_J\) is uniform on \(\Omega_{n,k}\).
+
+Fix any \(\ell\) real values. Each chain takes each of them at most once, so it
+hits them at at most \(\ell\) ranks \(j\), and the conditional probability of
+hitting them is at most the sum of the \(\ell\) largest masses of
+\(\Hyp(n,n-i,k)\). Averaging over chains and maximising over the \(\ell\)
+values gives the majorization. Finally \(\Hyp(n,n-i,k)\) and \(\Hyp(n,i,k)\)
+have the same masses in reverse order.
+\end{proof}
+This is the chain mechanism of \cite[Lemma~3 and Section~4]{AKP}, stated at an
+arbitrary strict gap; translating the population removes the need for a zero
+mean. The increment bound \(g\) is used in Corollary~\ref{cor:smallball}.
+
+\begin{lemma}[Atoms away from half-sampling]\label{lem:atom}
+If \(1\le k<n/2\) and \(1\le i<n\), then for every integer \(j\)
+\[
+ \binom ij\binom{n-i}{k-j}\le\binom{n-1}{k}.
+\]
+Equality holds exactly at \((i,j)=(1,0)\) and \((n-1,k)\), and, when
+\(n=2k+1\), also at \((2,1)\) and \((n-2,k-1)\).
+\end{lemma}
+\begin{proof}
+We may assume the left side is positive. Put \(\ell=k-j\) and \(m=n-i\). Since
+\(j+\ell=k<n/2=(i+m)/2\), interchanging the two groups if necessary we may
+assume \(\ell<m/2\), so that \(\binom m{\ell+1}\ge\binom m\ell\). Vandermonde's
+identity gives
+\begin{align*}
+ \binom{n-1}{k}
+ &=\sum_h\binom{i-1}{h}\binom m{k-h}
+ \ge\binom{i-1}{j}\binom m\ell+\binom{i-1}{j-1}\binom m{\ell+1}\\
+ &\ge\Bigl(\binom{i-1}{j}+\binom{i-1}{j-1}\Bigr)\binom m\ell
+ =\binom ij\binom m\ell .
+\end{align*}
+For equality in this orientation: if \(j=0\), the omitted terms vanish only
+when \(i=1\); if \(m=1\), then \(\ell=0\), which gives the other endpoint.
+Assume \(m\ge2\) and \(j\ge1\). If \(j\ge2\), the omitted term \(h=j-2\) is
+positive because \(\ell+2\le m\); hence \(j=1\). Equality in
+\(\binom m{\ell+1}\ge\binom m\ell\) forces \(m=2\ell+1\). If \(i=1\), then
+\(n=1+m=2\ell+2=2k\), excluded by \(k<n/2\); so \(i\ge2\). If \(i\ge3\), the
+omitted term \(h=2\) is positive; thus \(i=2\) and \(n=2k+1\). Undoing the
+interchange gives the list.
+\end{proof}
+
+Only the first partial sum matters when comparing with a two-point vector, so
+Lemma~\ref{lem:atom} gives
+\begin{equation}\label{eq:unbalancedmaj}
+ \Hyp(n,i,k)\preceq\Ber(k/n)\qquad(k<n/2,\ 1\le i<n).
+\end{equation}
+
+\begin{theorem}[Parity majorization at half-sampling]\label{thm:parity}
+Fix \(k\ge2\) and let \(h_t\) be the mass vector of \(\Hyp(2k,t,k)\),
+\(1\le t\le2k-1\). Then
+\[
+ h_{t+2}\preceq h_t\qquad(1\le t\le k-1).
+\]
+The comparison is proper for \(t<k-1\), and \(h_{k+1}\) and \(h_{k-1}\) agree
+after sorting. Consequently \(h_t\preceq U\) for odd \(t\) and \(h_t\preceq Q_k\)
+for even \(t\).
+\end{theorem}
+\begin{proof}
+Centre the support with \(\rho=2j-t\):
+\[
+ \eta_t(\rho)=\Prb\bigl(\Hyp(2k,t,k)=(t+\rho)/2\bigr)
+ =\frac{\binom{t}{(t+\rho)/2}\binom{2k-t}{(2k-t-\rho)/2}}{\binom{2k}{k}},
+\]
+supported on \(\rho\in\{-t,-t+2,\ldots,t\}\) when \(t\le k\). The law is
+symmetric in \(\rho\) (exchange the sampled and unsampled halves) and unimodal,
+because hypergeometric masses are log-concave in \(j\); and \(\eta_t=\eta_{2k-t}\).
+For \(t\le k-1\) the laws \(\eta_t\) and \(\eta_{t+2}\) live on the same parity
+lattice, and on the common support \(|\rho|\le t\),
+\begin{equation}\label{eq:radialratio}
+ \frac{\eta_{t+2}(\rho)}{\eta_t(\rho)}
+ =\frac{(t+2)(t+1)}{(2k-t)(2k-t-1)}\cdot
+   \frac{(2k-t)^2-\rho^2}{(t+2)^2-\rho^2}.
+\end{equation}
+For \(t<k-1\) we have \(t+2<2k-t\), so the right side increases strictly in
+\(\rho^2\). At the two new points \(\rho=\pm(t+2)\), \(\eta_t=0<\eta_{t+2}\).
+Both laws have total mass one, so the difference
+\(\eta_t-\eta_{t+2}\), as a function of \(|\rho|\), changes sign exactly once,
+from positive to negative. Hence for every \(R\) the central mass
+\(\sum_{|\rho|\le R}\eta_t(\rho)\) is at least the corresponding mass of
+\(\eta_{t+2}\): before the sign change this is immediate, and after it the
+central difference equals minus a tail difference, which is nonnegative.
+
+By symmetry and unimodality, the \(\ell\) largest masses of each law can be
+taken from the centre outwards. If \(t\) is even and \(\ell\) is odd, or \(t\)
+is odd and \(\ell\) is even, they form a full central block
+\(\{|\rho|\le R\}\), and the inequality above applies; both laws have the same
+parity, so the blocks match. For the remaining \(\ell\) the sum of the \(\ell\) largest masses is the
+average of the sums for \(\ell-1\) and \(\ell+1\), because the two masses of a
+symmetric pair are equal; so these inequalities follow as well. Thus
+\(h_{t+2}\preceq h_t\), properly for \(t<k-1\) since \(\eta_{t+2}\) has larger
+support. At \(t=k-1\), \(h_{k+1}=h_{k-1}\) after sorting, by \(\eta_t=\eta_{2k-t}\).
+Iterating, and using \(\eta_t=\eta_{2k-t}\) for \(t>k\), every odd \(t\)
+reduces to \(t=1\), where \(h_1=U\), and every even \(t\) to \(t=2\), where
+\(h_2=Q_k\) by the computation of \(c_1\) in Section~\ref{sec:small}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:frontier}]
+A nonconstant population has a strict gap, so Lemma~\ref{lem:chain} gives
+\(p\preceq\Hyp(n,i,k)\) for some \(1\le i<n\). If \(k<n/2\),
+\eqref{eq:unbalancedmaj} gives \(p\preceq\Ber(k/n)\); if \(k>n/2\), apply this
+to the complementary sample, whose sum is \(\sum_ix_i-X\) and has the same
+mass vector, and note \(\Ber((n-k)/n)\) and \(\Ber(k/n)\) agree after sorting.
+For \(n=2\) the law is \(U=\Ber(1/2)\). If \(n=2k\ge4\),
+Theorem~\ref{thm:parity} gives \(p\preceq U\) or \(p\preceq Q_k\). The
+populations \((1,0,\ldots,0)\) and, at \(n=2k\), \((1,1,0,\ldots,0)\) attain
+\(\Ber(k/n)\), \(U\) and \(Q_k\). Finally \(q_k>1/2\), so \(Q_k\not\preceq U\),
+while the two largest entries of \(U\) sum to one, so \(U\not\preceq Q_k\).
+The last sentence of the theorem follows from Schur-concavity.
+\end{proof}
+
+Related orderings of symmetric hypergeometric laws concern normal
+approximation \cite{MSch} or peakedness about a fixed centre as the sample size
+varies \cite{Levin}; Theorem~\ref{thm:parity} instead compares balanced laws
+centred at their own, moving, means.
+
+\begin{remark}[A shorter route to the frontier value]\label{rem:shortroute}
+At half-sampling the frontier can also be reached from the known maximal atom
+\(q_k\) \cite[Section~5]{MVV} and the symmetry \(X\overset d=\sum_ix_i-X\).
+If the largest atom is at most \(1/2\), the law is majorized by \(U\).
+Otherwise the largest atom is the centre of symmetry, with mass
+\(c\le q_k\), and the second largest is at most \((1-c)/2\), so the two
+largest sum to at most \((1+q_k)/2\); this is majorization by \(Q_k\).
+Theorem~\ref{thm:parity} is stronger: it orders all balanced hypergeometric
+laws within each parity class, and its strictness is what the equality
+classification in Section~\ref{sec:entropy} uses.
+\end{remark}
+
+\section{Entropy thresholds and equality cases}\label{sec:entropy}
+
+This section proves Theorem~\ref{thm:entropy} and
+Corollary~\ref{cor:universal}. By Theorem~\ref{thm:frontier}, the minimum is
+\(H_\alpha(\Ber(k/n))\) when \(n\ne2k\) and \(\min\{H_\alpha(U),H_\alpha(Q_k)\}\)
+when \(n=2k\ge4\), with \(H_\alpha(U)=1\). It remains to locate the crossover
+and to classify the minimisers.
+
+\paragraph{The threshold \(\alpha_k\).} Put
+\[
+ u_k=\frac{2k}{2k-1},\qquad v_k=\frac{k-1}{2k-1},\qquad
+ F_k(s)=\tfrac12u_k^s+v_k^s .
+\]
+Since \(Q_k=(u_k/2,v_k/2,v_k/2)\), the sum of the \(s\)-th powers of its entries
+is \(2^{-s}(u_k^s+2v_k^s)=2^{1-s}F_k(s)\), so
+\[
+ H_s(Q_k)=1+\frac{\log_2F_k(s)}{1-s}\qquad(s\ne1).
+\]
+Thus \(H_s(Q_k)<1\) exactly when \(F_k(s)>1\) for \(s>1\), and exactly when
+\(F_k(s)<1\) for \(s<1\). The function \(F_k\) is strictly convex, with
+\(F_k(0)=3/2\), \(F_k(1)=1\) and \(F_k(s)\to\infty\). Its derivative at one is
+\(F_k'(1)=\ln2-H_1(Q_k)\ln2<0\): indeed \(Q_k\preceq Q_2\), and
+\(H_1(Q_2)\ln2=\ln3-\tfrac13\ln2>\ln2\) since \(27>16\). So \(F_k\) has exactly
+one root \(\alpha_k>1\) besides \(s=1\); \(F_k>1\) on \((0,1)\), \(F_k<1\) on
+\((1,\alpha_k)\) and \(F_k>1\) on \((\alpha_k,\infty)\). Equation
+\eqref{eq:transition} is \(F_k(\alpha_k)=1\). At \(s=1\),
+\(H_1(Q_k)\ge H_1(Q_2)>1\). This gives the two regimes of
+Theorem~\ref{thm:entropy}. Direct substitution gives \(\alpha_2=2\). Both the
+largest entry and the sum of the two largest entries of \(Q_k\) decrease
+strictly with \(k\), so \(Q_{k+1}\prec Q_k\) properly; strict
+Schur-concavity at \(s=\alpha_k\) gives \(H_{\alpha_k}(Q_{k+1})>1\), hence
+\(F_{k+1}(\alpha_k)<1\) and \(\alpha_{k+1}>\alpha_k\).
+
+\begin{proof}[Proof of Corollary~\ref{cor:universal}]
+If \(n\ne2k\) the bound holds at every order by Theorem~\ref{thm:entropy}. If
+\(n=2k\ge4\), the minimum equals \(1=H_\alpha(\Ber(1/2))\) exactly when
+\(\alpha\le\alpha_k\); since \(\alpha_k\ge\alpha_2=2\), the bound holds for all
+\(n,k\) when \(\alpha\le2\), and for \(\alpha>2\) it fails at \(n=4\), \(k=2\).
+\end{proof}
+
+\begin{remark}[Size of \(\alpha_k\)]\label{rem:asymp}
+Let \(A_k=\ln2/\ln u_k\), so \(u_k^{A_k}=2\) and \(F_k(A_k)=1+v_k^{A_k}>1\);
+hence \(\alpha_k<A_k\). The inequality \(-\ln(1-x)\le x/(1-x)\) with
+\(x=1/(2k)\) gives \(A_k\ge(2k-1)\ln2\); as \(v_k<1/2\),
+\(v_k^{A_k-1}\le2^{1-(2k-1)\ln2}\), which decays exponentially in \(k\). So,
+for all sufficiently large \(k\),
+\(F_k(A_k-1)=1/u_k+v_k^{A_k-1}=1-\frac1{2k}+v_k^{A_k-1}<1\), and
+\(\alpha_k\in(A_k-1,A_k)\). On that interval
+\(F_k'(s)=\tfrac12u_k^s\ln u_k+v_k^s\ln v_k\ge\tfrac1{u_k}\ln u_k-v_k^{A_k-1}|\ln v_k|\),
+which is at least \(\tfrac12\ln u_k\) for all sufficiently large \(k\), since
+\(\ln u_k\sim1/(2k)\) and \(1/u_k\to1\) while \(v_k^{A_k-1}|\ln v_k|\) decays
+exponentially. The
+mean value theorem applied to \(F_k(A_k)-F_k(\alpha_k)=v_k^{A_k}\) gives
+\(0<A_k-\alpha_k\le2v_k^{A_k}/\ln u_k=O\bigl(k\,e^{-2(\ln2)^2k}\bigr)\), since
+\(v_k^{A_k}=2^{-A_k}(2v_k)^{A_k}\le2^{-A_k}\) and \(A_k\ge(2k-1)\ln2\). Expanding
+\(A_k=\ln2/(-\ln(1-1/(2k)))=\ln2\,(2k-\tfrac12-\tfrac1{24k}+O(k^{-2}))\) proves
+the asymptotic formula in Theorem~\ref{thm:entropy}. Rounded values are
+\(\alpha_3\approx3.594270\), \(\alpha_4\approx5.089878\),
+\(\alpha_5\approx6.531142\) and \(\alpha_{10}\approx13.512604\). Neither the
+expansion nor these values is used elsewhere.
+\end{remark}
+
+\paragraph{Equality cases.} We prove the last sentence of
+Theorem~\ref{thm:entropy}. Fix \(0<\alpha<\infty\) and a minimising population
+\(x\); by strict Schur-concavity, its mass vector \(p\) agrees after sorting
+with the frontier vector it is majorized by.
+
+\emph{A two-point law forces two values.} Suppose \(X\) takes exactly two
+values, differing by \(d>0\). Comparing two \(k\)-sets that share \(k-1\)
+elements shows \(x_\ell-x_{\ell'}\in\{0,\pm d\}\) for all \(\ell,\ell'\); three
+distinct population values would have extreme difference \(2d\), so there are
+exactly two, with multiplicities \(i\) and \(n-i\). Their sum takes
+\(\min(i,n-i,k,n-k)+1\) values, so for \(2\le k\le n-2\) we get
+\(i\in\{1,n-1\}\); for \(k\in\{1,n-1\}\), equality of the masses with
+\(\Ber(k/n)\) gives the same multiplicities.
+
+\emph{Unbalanced case \(n\ne2k\).} Here \(p=\Ber(k/n)\) is two-point, and the
+previous paragraph gives multiplicities \(\{1,n-1\}\).
+
+\emph{Balanced case below the threshold, \(\alpha<\alpha_k\).} Choose any strict
+gap of \(x\), with \(t\) entries below it. If \(t\) were even,
+Lemma~\ref{lem:chain} and Theorem~\ref{thm:parity} would give
+\(p\preceq Q_k\) and \(H_\alpha(p)\ge H_\alpha(Q_k)>1\), contradicting
+minimality. So \(t\) is odd and \(p\preceq U\) with equality, so \(p=U\) is
+two-point and \(x\) has multiplicities \(\{1,n-1\}\).
+
+\emph{Balanced case above the threshold, \(\alpha>\alpha_k\).} Now
+\(H_\alpha(U)=1>H_\alpha(Q_k)\), so no gap may have odd \(t\), and \(p=Q_k\)
+after sorting. For an even gap with \(t\notin\{2,2k-2\}\), the chain from
+\(t\) down to \(2\) (or from \(2k-t\) down to \(2\)) in Theorem~\ref{thm:parity}
+contains a proper step, so \(p\prec Q_k\) properly, which is impossible. Hence
+every gap has \(t\in\{2,2k-2\}\): either \(x\) has two values with
+multiplicities \(\{2,2k-2\}\), or three values \(y_1<y_2<y_3\) with
+multiplicities \(2,2k-4,2\) (for \(k\ge3\)). In the latter case fix a set
+\(M\) of \(k-2\) of the middle entries (possible since \(2k-4\ge k-2\)), and
+note that \(2k-4-(k-2)=k-2\ge1\) middle entries remain. Adding to \(M\) the
+pairs \(\{y_1,y_1\}\), \(\{y_1,y_2\}\), \(\{y_1,y_3\}\), \(\{y_2,y_3\}\),
+\(\{y_3,y_3\}\) gives \(k\)-sets whose sums
+\[
+ 2y_1<y_1+y_2<y_1+y_3<y_2+y_3<2y_3
+\]
+(each plus \(L_x(M)\)) are five distinct values, whereas \(Q_k\) has only three
+atoms. So three values are impossible. For \(k=2\) the only even gap is \(t=2\),
+which also forces two values.
+
+\emph{At the threshold, \(\alpha=\alpha_k\).} Both \(U\) and \(Q_k\) give
+entropy one. If some gap has odd \(t\), then \(p\preceq U\) with equal entropy,
+so \(p=U\) and the one-outlier family results. If all gaps are even, the
+previous paragraph applies and gives the two-outlier family. These families
+are distinct, since \(q_k>1/2\). This completes the proof of
+Theorem~\ref{thm:entropy}.
+
+\section{Largest atoms, small balls and incidence ranks}\label{sec:conc}
+
+This section records three consequences of Section~\ref{sec:maj}: the largest
+possible atom, its extension to short intervals, and an extremal problem for
+incidence matrices.
+
+\begin{corollary}[Largest atom]\label{cor:concentration}
+For a nonconstant real population,
+\[
+ \sup_t\Prb(X=t)\le
+ \begin{cases}
+ \max(k,n-k)/n,&n\ne2k,\\
+ q_k=k/(2k-1),&n=2k\ge4,\\
+ 1/2,&n=2.
+ \end{cases}
+\]
+Every bound is attained. Away from half-sampling, equality holds exactly for
+two-valued populations with multiplicities \(\{1,n-1\}\) and, when
+\(n=2r+1\), also \(\{2,n-2\}\). At half-sampling with \(n\ge4\), equality
+requires multiplicities \(\{2,n-2\}\).
+\end{corollary}
+\begin{proof}
+The bounds are the first partial sums in Theorem~\ref{thm:frontier}. For
+equality away from half-sampling assume \(k<n/2\). A population with three
+distinct values has, for every \(t\), at most a proportion \(T(n,k)\) of
+\(k\)-sums equal to \(t\), by Lemma~\ref{lem:three}; and
+\(T(n,k)-(n-k)/n=k(2k-n-1)/(n(n-1))<0\). So the population is two-valued, the
+largest atom of \(X\) is a largest atom of \(\Hyp(n,i,k)\), and
+Lemma~\ref{lem:atom} classifies equality. At half-sampling the three-value
+bound is \(T(2k,k)=(k-1)/(2k-1)<q_k\). For two-valued populations the largest
+atom of \(\Hyp(2k,i,k)\) is its central, modal atom: for odd \(i\) every atom
+is at most \(1/2\) by Theorem~\ref{thm:parity}, and for even \(i=2s\) the
+central atom is \(c_s\), which equals \(q_k\) only for \(s\in\{1,k-1\}\)
+(Section~\ref{sec:small}).
+\end{proof}
+
+The case \(n=2k\) of this bound is due to \cite{MVV}. In particular the
+minimum min-entropy \(H_\infty=-\log_2\max_tp_t\) is minus the binary logarithm
+of the displayed bound; at \(n=2r+1\ge5\) it has more minimisers than any
+finite order.
+
+The chain in Lemma~\ref{lem:chain} moves by at least the gap \(g\) at each
+step, so the atom bound extends to short intervals. This is a small-ball
+(Littlewood--Offord type) inequality for sampling without replacement, at the
+natural scale of the population's largest gap.
+
+\begin{corollary}[Small-ball inequality]\label{cor:smallball}
+Let \(x\) be a nonconstant real population and let \(g\) be the largest gap
+between consecutive distinct values of \(x\). Then every half-open interval
+\(I\) of length at most \(g\) satisfies \(\Prb(X\in I)\le\beta(n,k)\), where
+\(\beta(n,k)\) is the right side of Corollary~\ref{cor:concentration}. More
+generally, a union of \(\ell\) such intervals has probability at most the sum
+of the \(\ell\) largest entries of the corresponding frontier vector of
+Theorem~\ref{thm:frontier}; at \(n=2k\ge4\) this means the larger of the
+sums of the \(\ell\) largest entries of \(U\) and of \(Q_k\). The bounds are
+attained by two-valued populations.
+\end{corollary}
+\begin{proof}
+Apply Lemma~\ref{lem:chain} at the largest gap (it holds for every
+\(k\); the bound for \(\Hyp(n,i,k)\) with \(k>n/2\) follows from the case
+\(n-k\) because the two laws have the same masses). Consecutive chain sums differ
+by at least \(g\), so a half-open interval of length at most \(g\) contains at
+most one of them, and a union of \(\ell\) such intervals at most \(\ell\). The
+argument in the proof of Lemma~\ref{lem:chain} then bounds the probability by
+the sum of the \(\ell\) largest masses of \(\Hyp(n,i,k)\), and
+Lemma~\ref{lem:atom} and Theorem~\ref{thm:parity} bound these by the frontier.
+For a two-valued population the bound with \(\ell=1\) is the largest atom,
+which Corollary~\ref{cor:concentration} attains.
+\end{proof}
+
+For a family \(\mathcal F\subseteq\Omega_{n,k}\), let \(M(\mathcal F)\) be its
+real incidence matrix: rows are the sets in \(\mathcal F\), columns the
+elements of \([n]\).
+
+\begin{corollary}[One unit of rank deficiency]\label{cor:rank}
+The largest families with \(\rank M(\mathcal F)<n\) have size
+\[
+ \binom{n-1}{k}\ (k<n/2),\qquad
+ 2\binom{n-2}{k-1}\ (n=2k\ge4),\qquad
+ \binom{n-1}{k-1}\ (k>n/2),\qquad
+ 1\ (n=2,\ k=1).
+\]
+\end{corollary}
+\begin{proof}
+A nonzero null vector \(x\) of \(M(\mathcal F)\) makes \(L_x\) vanish on
+\(\mathcal F\). If \(x\) is constant the family is empty; otherwise
+Corollary~\ref{cor:concentration} bounds \(|\mathcal F|\). For \(k<n/2\) all
+\(k\)-sets avoiding one element attain the bound; for \(k>n/2\) all \(k\)-sets
+containing one element do, with null vector \((-(k-1),1,\ldots,1)\). At
+half-sampling take all \(k\)-sets containing exactly one of two fixed elements,
+with null vector \(((k-1)^2,(-1)^{2k-2})\). The case \(n=2\) is immediate.
+\end{proof}
+
+Corollary~\ref{cor:rank} is not new: it is the case \(s=t=1\) of the
+rank-extremal problem studied by Grosu, Person and Szab\'o \cite{GPS}, who
+report that this case was determined by Odlyzko and that Ahlswede, Aydinian
+and Khachatrian solved it for ordinary incidence matrices and every rank
+deficiency
+\cite[Section~2, Remark]{GPS}. It is included because it follows in a few
+lines from Corollary~\ref{cor:concentration}.
+
+\section{The hypergeometric tail problem}\label{sec:tail}
+
+This section proves Theorem~\ref{thm:tail} and states its consequence for the
+MMS problem. The proof uses one external lemma.
+
+\begin{lemma}[{Ai, Karagiannis, Ku\v{z}elka and Pelekis \cite[Theorem~2]{AKKP}}]\label{lem:AKKP}
+Let \(Y\) be an integer-valued random variable with \(\E|Y|<\infty\) whose
+survival probabilities \(\Prb(Y\ge j)\) form a log-concave sequence. If
+\(m\) is an integer with \(\E Y\ge m\) and
+\(\Prb(Y=m+1)\ge\tfrac12\Prb(Y=m)>0\), then \(\Prb(Y\ge m+1)\ge1/4\).
+\end{lemma}
+(The cited theorem allows any ratio \(\gamma\in(0,1/2]\) in place of
+\(\tfrac12\), with bound \(\gamma/(1+2\gamma)\).) A hypergeometric law has
+log-concave masses, since
+\[
+ \frac{\Prb(H=j+1)}{\Prb(H=j)}=\frac{(i-j)(k-j)}{(j+1)(n-i-k+j+1)}
+\]
+decreases in \(j\) on its support, which is an interval; log-concave masses
+give log-concave survival probabilities, so Lemma~\ref{lem:AKKP} applies to
+\(H\sim\Hyp(n,i,k)\).
+
+\begin{proof}[Proof of Theorem~\ref{thm:tail}]
+Let \(n\ge4k\), \(H\sim\Hyp(n,i,k)\) and \(\mu=ik/n\). Since \(H\) is
+integer-valued, \(\Prb(H\ge\mu)=\Prb(H\ge\lceil\mu\rceil)\).
+
+\emph{Case A: \(\mu\le1\).} Then \(\lceil\mu\rceil=1\) and
+\(\Prb(H\ge1)=1-\binom{n-i}{k}/\binom nk\). For \(i=1\) this equals \(k/n\).
+For \(i\ge2\), \(\binom{n-i}{k}\le\binom{n-2}{k}<\binom{n-1}{k}\), since
+\(\binom{n-1}{k}-\binom{n-2}{k}=\binom{n-2}{k-1}>0\); so \(\Prb(H\ge1)>k/n\).
+
+\emph{Case B: \(\mu>1\) and \(\mu\notin\Z\).} Here
+\(\lambda=(n-i)(n-k)/n\ge(n-k)/n\ge3/4\), so both \(\mu\) and \(\lambda\)
+exceed \(\log(4/3)\), and \cite[Theorem~3(1)]{AKKP} gives
+\(\Prb(H\ge\mu)=\Prb(H>\mu)\ge1/4\ge k/n\). For completeness we recall their
+argument in the present setting. If \(i=n-1\), then
+\(\lceil\mu\rceil=k\) and \(\Prb(H=k)=(n-k)/n\ge3/4\). Let \(i\le n-2\) and
+\(m=\lfloor\mu\rfloor\ge1\). Because \(\mu\) lies strictly between the integers
+\(m\) and \(m+1\) and the support of \(H\) is an integer interval containing
+\(\mu\) in its convex hull, both \(m\) and \(m+1\) carry positive mass. Put
+\(\lambda=n-i-k+\mu=(n-i)(n-k)/n\ge2(n-k)/n\ge3/2\); then the integer
+\(n-i-k+m=\lambda-(\mu-m)\) exceeds \(1/2\), so \(n-i-k+m\ge1\). Also
+\(ik-nm\ge1\). The identity of \cite[Section~3]{AKKP}
+\[
+ 2(i-m)(k-m)-(m+1)(n-i-k+m+1)=(m-1)(n-i-k+m-1)+2(ik-nm-1)
+\]
+shows that the left side is nonnegative, i.e.
+\(\Prb(H=m+1)\ge\tfrac12\Prb(H=m)\). Lemma~\ref{lem:AKKP} gives
+\(\Prb(H\ge\mu)=\Prb(H\ge m+1)\ge1/4\ge k/n\).
+
+\emph{Case C: \(\mu=j\in\Z\), \(j\ge2\).} If \(j-1\) is outside the support,
+then \(\Prb(H\ge j)=1\). Otherwise, with the cell counts
+\(a=j\), \(b=i-j\), \(c=k-j\), \(d=n-i-k+j\) of Section~\ref{sec:support},
+all positive, \eqref{eq:ratios} gives
+\(\Prb(H=j)/\Prb(H=j-1)=(b+1)(c+1)/(bc)>1\). Lemma~\ref{lem:AKKP} with
+\(m=j-1\) gives \(\Prb(H\ge j)\ge1/4\ge k/n\).
+
+So \(\Prb(H\ge\mu)\ge k/n\) for all \(i\), with equality at \(i=1\). In Cases
+B and C the bound is at least \(1/4\), which exceeds \(k/n\) when \(n>4k\), and
+in Case A it is strict for \(i\ge2\). Hence for \(n>4k\) only \(i=1\) attains
+\(k/n\).
+\end{proof}
+
+The proof shows slightly more: for \(n\ge4k\) every \(i\) with
+\(ik/n>1\) has tail at least \(1/4\). The finite check
+described at the end of the paper finds, for all \(k\le40\) and \(4k\le n\le10k\), that
+every \(i\ge2\) has tail at least \(\tfrac54\cdot\tfrac kn\); so in that range
+\(i=1\) is also the unique minimiser at \(n=4k\).
+
+\begin{corollary}[Aydinian--Blinovsky implies MMS]\label{cor:AB}
+For \(n\ge4k\), \(\min_{1\le i\le n-1}\Prb(\Hyp(n,i,k)\ge ik/n)=k/n\).
+Consequently, if the conjecture of Aydinian and Blinovsky \cite{AB} holds,
+then every real population with zero total and \(n\ge4k\) satisfies
+\(\Prb(X\ge0)\ge k/n\), which is the MMS conjecture.
+\end{corollary}
+\begin{proof}
+The first statement is Theorem~\ref{thm:tail}. In the conjecture of \cite{AB},
+as formulated in \cite{AKP,AP}, the extremal populations are \(i\) copies of
+\(1/i\) and \(n-i\) copies of \(-1/(n-i)\); for them \(X\ge0\) exactly when
+\(\Hyp(n,i,k)\ge ik/n\).
+\end{proof}
+
+\begin{remark}[Below \(n=4k\)]\label{rem:below4k}
+The restriction \(n\ge4k\) cannot simply be dropped. Ai, Ku\v{z}elka and
+Pelekis note that \(i=1\) is not minimal at \(n=3k+1\) for \(k\ge3\) \cite{AKP}. The finite
+check described at the end of the paper shows that for each \(2\le k\le40\) there are
+values \(2k<n<4k\) at which some \(i\ge2\) has a smaller tail than \(i=1\), the
+largest such ratio \(n/k\) being \(10/3\) (at \(k=3\), \(n=10\)); for these \(k\)
+there is none with \(10/3<n/k<4\). The exact range of \(n/k\) where the single outlier is optimal
+remains open.
+\end{remark}
+
+\section{Abelian groups}\label{sec:abelian}
+
+This section proves Theorem~\ref{thm:groups}. The real proofs used order; over
+a general Abelian group only cancellation is available, and parity takes the
+place of order. Throughout, \(f(S)=c+\sum_{i\in S}a_i\) with values in \(G\),
+and \(\delta_G(n,k)\) is the smallest proportion of \(k\)-sets with
+\(f(S)\ne0\), over \(f\) not identically zero on \(\Omega_{n,k}\). (A formal
+expression with nonzero coefficients may still vanish identically on the
+slice; such \(f\) are excluded.)
+
+\begin{lemma}[Independent sets in unimodal sequences]\label{lem:unimodal-parity}
+Let \(w_0,\ldots,w_m\) be nonnegative and unimodal. Then the largest total
+weight of a set \(I\subseteq\{0,\ldots,m\}\) containing no two consecutive
+integers is \(\max\{\sum_{j\ \mathrm{even}}w_j,\sum_{j\ \mathrm{odd}}w_j\}\).
+\end{lemma}
+\begin{proof}
+Both parity classes are admissible, so the maximum is at least the right side.
+Conversely, let \(I\) be admissible and let \(h\) be a mode. Call consecutive
+selected indices \(a<b\) a \emph{parity change} if \(b-a\) is odd; then
+\(b-a\ge3\). If \(a<h\), shift every selected index \(\le a\) one step to the
+right: these indices lie on the weakly increasing arm \(\{0,\ldots,h\}\), so
+no weight decreases, and the gap \(b-a\) drops to an even number \(\ge2\). If
+\(a\ge h\), then every selected index \(\ge b\) exceeds \(h\) and lies on the
+weakly decreasing arm; shift each of them one step to the left, with the same
+effect. In both cases all other gaps keep their length, the set stays
+admissible, and the number of parity changes drops by one. After finitely many
+steps \(I\) lies in one parity class, without loss of weight, and
+nonnegativity bounds its weight by that class.
+\end{proof}
+
+For the binary Krawtchouk polynomials
+\(K_k^{(n)}(i)=\sum_j(-1)^j\binom ij\binom{n-i}{k-j}\) we use the following
+classical bound.
+
+\begin{lemma}[{Dumer--Kapralova \cite{DK}; see \cite[Theorem~1.2]{BCIM}}]\label{lem:known-krawtchouk}
+For \(1\le i\le n-1\),
+\(|K_k^{(n)}(i)|\le|K_k^{(n)}(1)|\) if \(k\ne n/2\), and
+\(|K_k^{(n)}(i)|\le|K_k^{(n)}(2)|\) if \(k=n/2\). Moreover
+\[
+ \frac{K_k^{(n)}(1)}{\binom nk}=\frac{n-2k}{n},\qquad
+ \frac{K_k^{(n)}(2)}{\binom nk}=\frac{(n-2k)^2-n}{n(n-1)} .
+\]
+\end{lemma}
+Brouwer, Cioab\u{a}, Ihringer and McGinnis state the inequalities as their
+Theorem~1.2, attributing them to \cite[Corollary~10]{DK}, and give a
+self-contained proof; the evaluations follow from the definition. In the
+balanced case we use the lemma only for \(n\ge4\).
+
+\begin{proof}[Proof of Theorem~\ref{thm:groups}: distance]
+By complementation assume \(k\le n/2\). If all \(a_i\) are equal, \(f\) is
+constant on the slice and, being not identically zero, has full support. If
+three of the \(a_i\) are distinct, Lemma~\ref{lem:three} gives a proportion at
+least \(2k(n-k)/(n(n-1))\ge k/n\), which suffices in both regimes (at \(n=2k\),
+\(2k^2/(2k(2k-1))=k/(2k-1)>(k-1)/(2k-1)\)).
+
+It remains to treat two values, with multiplicities \(i\) and \(n-i\). Then
+\(f(S)=A+gJ\) with \(A\in G\), \(g\ne0\) and \(J\sim\Hyp(n,i,k)\). The set
+of integers \(j\) with \(A+gj=0\) contains no two consecutive integers, since
+otherwise \(g=0\). The masses \(w_j=\Prb(J=j)\) are unimodal (they are
+log-concave, Section~\ref{sec:tail}), so Lemma~\ref{lem:unimodal-parity} gives
+\[
+ \Prb(f=0)\le\max\{\Prb(J\ \mathrm{even}),\Prb(J\ \mathrm{odd})\}
+ =\frac12\Bigl(1+\frac{|K_k^{(n)}(i)|}{\binom nk}\Bigr),
+\]
+and Lemma~\ref{lem:known-krawtchouk} bounds this by \((n-k)/n\) when
+\(n>2k\) and by \(k/(2k-1)\) when \(n=2k\ge4\). For \((n,k)=(2,1)\) a function
+on the two-point slice that is not identically zero has support at least one.
+
+For attainment, let \(g\ne0\). The function \(g\one_{\{1\in S\}}\) has
+nonzero proportion \(k/n\) (and \(1/2\) at \(n=2\)). At balance,
+\(f(S)=g(\one_{\{1\in S\}}+\one_{\{2\in S\}}-1)\) vanishes exactly when one of
+\(1,2\) lies in \(S\), and otherwise equals \(\pm g\ne0\), whatever the order of
+\(g\); its nonzero proportion is \((k-1)/(2k-1)\).
+\end{proof}
+
+Consequently, if \(a_1,\ldots,a_n\in G\) are not all equal, every atom of
+\(X=\sum_{i\in S}a_i\) has mass at most \(1-\delta_G(n,k)\): two \(k\)-sets that
+share \(k-1\) elements and differ at unequal coefficients have different sums,
+so \(X-z\) is not identically zero for any \(z\in G\).
+
+\begin{proof}[Proof of Theorem~\ref{thm:groups}: entropy]
+Write \(G[2]=\{g\in G:2g=0\}\). For \(n\ne2k\), every atom has mass at most
+\(1-r/n\), so \(\Ber(k/n)\), sorted as \((1-r/n,r/n)\), majorizes the law;
+\((g,0,\ldots,0)\) with \(g\ne0\) attains it. For \(n=2\) the law is \(U\).
+
+Let \(n=2k\ge4\). Every atom has mass at most \(q_k\), so \(\Ber(q_k)\)
+majorizes every law. If some \(g\ne0\) has \(2g=0\), the population
+\((g,g,0,\ldots,0)\) has sum \(g\) when exactly one of the first two entries
+is chosen (probability \(q_k\)) and \(0\) otherwise; this is \(\Ber(q_k)\).
+
+If \(G[2]=\{0\}\), put \(T=\sum_ia_i\). Complementation gives
+\(X\overset d=T-X\), and the involution \(y\mapsto T-y\) has at most one fixed
+point, since two fixed points would differ by a nonzero element of \(G[2]\).
+If every atom has mass at most \(1/2\), the law is majorized by \(U\).
+Otherwise an atom of mass \(c>1/2\) must be the fixed point, with \(c\le q_k\);
+every other atom has a distinct partner of equal mass, so the second largest
+mass is at most \((1-c)/2\) and the two largest sum to at most
+\((1+q_k)/2\). Hence the law is majorized by \(Q_k\). The populations
+\((g,0,\ldots,0)\) and \((g,g,0,\ldots,0)\) attain \(U\) and \(Q_k\), since
+\(0,g,2g\) are distinct. Schur-concavity and Section~\ref{sec:entropy} finish
+the proof.
+\end{proof}
+
+\begin{remark}[Scope]\label{rem:Zq}
+The case \(G[2]=\{0\}\) includes torsion-free groups and finite groups of odd
+order. Theorem~\ref{thm:groups} concerns the affine problem. The zero-sum
+problem of Theorem~\ref{thm:support} does \emph{not} carry over to finite
+groups: over \(\Z_2\), the vector \((0^7,1^4)\) has zero total and only \(224\)
+nonzero \(5\)-sums among \(\binom{11}5\), fewer than the real minimum
+\(2\binom94=252\); over \(\Z_3\), \((1^9,2^3)\) with \(k=5\) gives \(414<420\);
+over \(\Z_5\), \((0,1^{10})\) with \(k=5\) gives \(210<252\). The reason is
+that the zero event of a two-valued population becomes a residue class of the
+hypergeometric count rather than a single atom, which defeats
+Lemma~\ref{lem:meanatom}. Determining the zero-sum minimum over \(\Z_q\) is
+open. No classification of the group-valued entropy minimisers is attempted.
+\end{remark}
+
+\section{Open problems}\label{sec:open}
+
+\begin{enumerate}
+\item \emph{The sign problem below \(4k\), and the reduction itself.} Determine
+the exact range of \(n/k\) in which the single outlier minimises
+\(\Prb(\Hyp(n,i,k)\ge ik/n)\) (Remark~\ref{rem:below4k}); and prove the
+Aydinian--Blinovsky reduction, which with Theorem~\ref{thm:tail} would give the
+MMS conjecture.
+\item \emph{Higher Johnson eigenspaces.} Find the minimum support of the
+eigenspace of the \(\ell\)-th eigenvalue of \(J(n,k)\) for all \(n\), beyond
+the large-\(n\) result of \cite{VMV}; or the analogous first-eigenspace problem
+for Grassmann graphs.
+\item \emph{Finite groups.} Determine the zero-sum minimum support over
+\(\Z_q\) (Remark~\ref{rem:Zq}) and classify the group-valued entropy
+minimisers.
+\item \emph{Higher degree.} Find the exact distance of degree-\(d\) polynomials
+on the Boolean slice for \(d\ge2\), where \cite{ABSS} gives approximate bounds.
+\end{enumerate}
+
+\section*{Data, verification and AI use}\label{sec:data}
+\addcontentsline{toc}{section}{Data, verification and AI use}
+All proofs above are complete as written and use no computer step. The
+accompanying scripts check the statements exactly (integer or rational
+arithmetic) on finite ranges: an exhaustive search over all candidate vectors
+for \(n\le7\), which is complete because every minimiser spans a line cut out
+by \(0/1\) equations and so has integer entries bounded by the maximal
+determinant of a \(0/1\) matrix of order \(n-1\); the support formula on
+integer grids and the integer-mean comparison through \(n=300\); the atom and
+parity majorization statements; all populations with entries in \(\{0,1,2,3\}\) and \(n\le10\) against the entropy
+and equality statements; the hypergeometric tail statements for all
+\(k\le40\), \(2k<n\le10k\); the small-ball inequality on random rational
+populations; and the group statements on small Abelian groups. The scripts and their outputs are part of the
+release. This paper was prepared with substantial assistance from AI
+systems, which produced the proofs, computations and text; it has been checked
+by AI-assisted internal review and exact computation, not by external referees
+or a proof assistant.
+
+\begin{thebibliography}{99}
+\bibitem{AB}
+H.~Aydinian and V.~Blinovsky,
+A remark on the problem of nonnegative \(k\)-subset sums,
+\emph{Problems of Information Transmission} \textbf{48}(4) (2012), 347--351.
+\url{https://doi.org/10.1134/S0032946012040059}.
+
+\bibitem{ABSS}
+P.~Amireddy, A.~R.~Behera, S.~Srinivasan and M.~Sudan,
+A near-optimal polynomial distance lemma over Boolean slices,
+in \emph{52nd International Colloquium on Automata, Languages, and
+Programming (ICALP 2025)}, LIPIcs \textbf{334} (2025), 11:1--11:17.
+\url{https://doi.org/10.4230/LIPIcs.ICALP.2025.11}.
+Full version (Theorem~6.1): ECCC TR25-056,
+\url{https://eccc.weizmann.ac.il/report/2025/056/}.
+
+\bibitem{AKP}
+J.~Ai, O.~Ku\v{z}elka and C.~Pelekis,
+An entropic analogue of the MMS conjecture,
+preprint, arXiv:2606.30486v1 (2026).
+\url{https://arxiv.org/abs/2606.30486v1}.
+
+\bibitem{AKP25}
+J.~Ai, O.~Ku\v{z}elka and C.~Pelekis,
+Concentration inequalities for the sum in sampling without replacement: an
+approach via majorization,
+preprint, arXiv:2503.20473 (2025).
+\url{https://arxiv.org/abs/2503.20473}.
+
+\bibitem{AKKP}
+J.~Ai, V.~Karagiannis, O.~Ku\v{z}elka and C.~Pelekis,
+On the probability that a discrete IFR random variable exceeds its mean,
+preprint, arXiv:2610.24726v1 (2026).
+\url{https://arxiv.org/abs/2610.24726v1}.
+
+\bibitem{AP}
+J.~Ai and C.~Pelekis,
+On lower bounds for hypergeometric tails,
+\emph{Statistics \& Probability Letters} \textbf{236} (2026), 110798.
+\url{https://doi.org/10.1016/j.spl.2026.110798}.
+Preprint: arXiv:2601.09485.
+
+\bibitem{BCIM}
+A.~E.~Brouwer, S.~M.~Cioab\u{a}, F.~Ihringer and M.~McGinnis,
+The smallest eigenvalues of Hamming graphs, Johnson graphs and
+other distance-regular graphs with classical parameters,
+\emph{Journal of Combinatorial Theory, Series B} \textbf{133} (2018), 88--121.
+\url{https://doi.org/10.1016/j.jctb.2018.04.005}.
+
+\bibitem{DK}
+I.~Dumer and O.~Kapralova,
+Spherically punctured biorthogonal codes,
+\emph{IEEE Transactions on Information Theory} \textbf{59}(9) (2013),
+6010--6017.
+\url{https://doi.org/10.1109/TIT.2013.2250579}.
+
+\bibitem{GPS}
+C.~Grosu, Y.~Person and T.~Szab\'o,
+On the rank of higher inclusion matrices,
+\emph{Journal of the London Mathematical Society} \textbf{90}(2) (2014), 333--349.
+\url{https://doi.org/10.1112/jlms/jdu029}.
+
+\bibitem{Levin}
+B.~Levin,
+A stochastic ordering of multiple hypergeometric laws: peakedness of category
+counts about half the population category sizes is symmetric unimodal in the
+sample size,
+\emph{Sequential Analysis} \textbf{43}(4) (2024), 417--431.
+\url{https://doi.org/10.1080/07474946.2024.2379901}.
+Preprint: arXiv:2311.17884.
+
+\bibitem{MS88}
+N.~Manickam and N.~M.~Singhi,
+First distribution invariants and EKR theorems,
+\emph{Journal of Combinatorial Theory, Series A} \textbf{48}(1) (1988), 91--103.
+\url{https://doi.org/10.1016/0097-3165(88)90077-5}.
+
+\bibitem{MSch}
+L.~Mattner and J.~Schulz,
+On normal approximations to symmetric hypergeometric laws,
+\emph{Transactions of the American Mathematical Society} \textbf{370}(1) (2018), 727--748.
+\url{https://doi.org/10.1090/tran/6986}.
+
+\bibitem{MVV}
+I.~Yu.~Mogilnykh, K.~V.~Vorob'ev and A.~A.~Valyuzhenich,
+MMS-type problems for Johnson scheme,
+\emph{Siberian Electronic Mathematical Reports} \textbf{15} (2018), 1663--1670.
+\url{https://doi.org/10.33048/semi.2018.15.137}.
+Preprint: arXiv:1810.04075.
+
+\bibitem{MWW}
+M.~Madiman, L.~Wang and J.~O.~Woo,
+Majorization and R\'enyi entropy inequalities via Sperner theory,
+\emph{Discrete Mathematics} \textbf{342}(10) (2019), 2911--2923.
+\url{https://doi.org/10.1016/j.disc.2019.03.002}.
+
+\bibitem{Pok}
+A.~Pokrovskiy,
+A linear bound on the Manickam--Mikl\'os--Singhi conjecture,
+\emph{Journal of Combinatorial Theory, Series A} \textbf{133} (2015), 280--306.
+\url{https://doi.org/10.1016/j.jcta.2015.01.007}.
+
+\bibitem{SV}
+E.~Sotnikova and A.~Valyuzhenich,
+Minimum supports of eigenfunctions of graphs: a survey,
+\emph{The Art of Discrete and Applied Mathematics} (2021).
+\url{https://doi.org/10.26493/2590-9770.1404.61e}.
+Preprint: arXiv:2102.11142.
+
+\bibitem{VMV}
+K.~Vorob'ev, I.~Mogilnykh and A.~Valyuzhenich,
+Minimum supports of eigenfunctions of Johnson graphs,
+\emph{Discrete Mathematics} \textbf{341}(8) (2018), 2151--2158.
+\url{https://doi.org/10.1016/j.disc.2018.04.018}.
+\end{thebibliography}
+\end{document}
